@@ -1,0 +1,8 @@
+node_modules/
+.wrangler/
+.omc/
+.impeccable/review/
+*.xlsx
+*.xls
+*.csv
+dev/fixture.json

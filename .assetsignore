@@ -1,0 +1,24 @@
+# 웹에 올리지 않을 파일 — 저장소 내부·개발용·테스트·문서
+.git
+.git/**
+.wrangler
+.wrangler/**
+.impeccable
+.impeccable/**
+.omc
+.claude
+node_modules
+tests
+tests/**
+tools
+tools/**
+README.md
+PRODUCT.md
+DESIGN.md
+package.json
+wrangler.jsonc
+.gitignore
+.assetsignore
+*.bat
+dev
+dev/**

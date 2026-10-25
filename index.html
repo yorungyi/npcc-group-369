@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net https://cdn.sheetjs.com; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://ulvdlmokrvgxrabfvrza.supabase.co; worker-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#F3F6F8">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="연단체 369">
+<title>연단체 3·6·9</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="css/app.css?v=1">
+<link rel="stylesheet" href="css/sales.css?v=1">
+</head>
+<body>
+
+<!-- 로그인 -->
+<section class="login" id="login" hidden>
+  <form class="login-card" id="loginForm" novalidate>
+    <div class="login-mark" aria-hidden="true" data-r="3">
+      <i class="st on"></i><i class="st on"></i><i class="st on m"></i>
+    </div>
+    <h1>연단체 3·6·9</h1>
+    <p>노스팜CC 연단체 후식사 프로모션 · 매출 실적. 매출등록 시스템과 같은 계정으로 로그인합니다.</p>
+    <div>
+      <label class="lbl" for="loginEmail">이메일</label>
+      <input class="field" id="loginEmail" type="email" autocomplete="username" required>
+    </div>
+    <div>
+      <label class="lbl" for="loginPw">비밀번호</label>
+      <input class="field" id="loginPw" type="password" autocomplete="current-password" required>
+    </div>
+    <button class="btn btn-primary" id="loginBtn" type="submit">로그인</button>
+    <p class="err" id="loginErr" role="alert"></p>
+  </form>
+</section>
+
+<div class="shell" id="shell" hidden>
+  <header class="bar" id="bar">
+    <div class="bar-title">
+      <h1 id="barTitle">3·6·9 프로모션</h1>
+      <p id="barSub">&nbsp;</p>
+    </div>
+    <label class="sr-only" for="yearSel">연도</label>
+    <select class="year-select" id="yearSel"></select>
+    <button class="sync" id="syncBtn" type="button" data-state="ok" aria-live="polite"><i aria-hidden="true"></i><span id="syncText">동기화됨</span></button>
+  </header>
+
+  <main>
+    <!-- ───────── 프로모션 ───────── -->
+    <section class="tab" id="tab-promo" aria-labelledby="barTitle">
+      <div class="card ladder" id="ladder">
+        <div class="ladder-top">
+          <h2>후식사 사다리</h2>
+          <p id="ladderNote"></p>
+        </div>
+        <div class="rungs" id="rungs" role="group" aria-label="후식사 횟수별 단체 수. 누르면 그 칸만 봅니다"></div>
+        <div class="ladder-key">
+          <span data-r="3"><i></i>3회 생맥주 피쳐</span>
+          <span data-r="6"><i></i>6회 오늘의 샐러드</span>
+          <span data-r="9"><i></i>9회 닭날개&amp;감자튀김</span>
+          <span><i class="hatch"></i>다음 후식이면 지급</span>
+        </div>
+      </div>
+
+      <div class="tools">
+        <div class="seg" id="viewChips" role="group" aria-label="보기"></div>
+        <div class="search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+          <label class="sr-only" for="promoSearch">단체명 검색</label>
+          <input class="field" id="promoSearch" type="search" placeholder="단체명 검색" autocomplete="off">
+        </div>
+      </div>
+
+      <div class="promo-grid">
+        <div class="promo-col">
+          <section id="pendingSec" aria-labelledby="pendingH">
+            <div class="sec-head"><h2 id="pendingH">지급 대기<span class="count" id="pendingN"></span></h2><span class="hint">달성했는데 지급 체크가 없는 건</span></div>
+            <div class="list" id="pendingList"></div>
+          </section>
+          <section id="nextSec" aria-labelledby="nextH">
+            <div class="sec-head"><h2 id="nextH">다음 후식이면 지급<span class="count" id="nextN"></span></h2><span class="hint">예상 방문일 순</span></div>
+            <div class="list" id="nextList"></div>
+          </section>
+        </div>
+        <div class="promo-col" id="rungSecs"></div>
+      </div>
+    </section>
+
+    <!-- ───────── 매출 (v3 이식) ───────── -->
+    <section class="tab" id="tab-sales" hidden>
+      <div class="yd" id="yd">
+        <header id="overview">
+          <h1 id="yd-title">연단체 식음 매출</h1>
+          <p class="yd-meta" id="yd-meta">&nbsp;</p>
+          <p class="yd-take" id="yd-take"></p>
+        </header>
+
+        <p class="yd-empty-year" id="yd-empty-year" hidden>이 연도에 확정된 엑셀 자료가 없습니다. 「자료」 탭에서 엑셀을 올리면 매출이 집계됩니다.</p>
+
+        <nav class="yd-filters" id="filters" aria-label="필터">
+          <div class="yd-fgroup" role="group" aria-label="기간">
+            <span class="yd-flabel">기간</span>
+            <span id="yd-months" class="yd-fgroup"></span>
+          </div>
+          <div class="yd-fgroup" role="group" aria-label="순위 기준">
+            <span class="yd-flabel">순위 기준</span>
+            <button type="button" class="yd-btn" data-metric="total">총매출</button>
+            <button type="button" class="yd-btn" data-metric="per">1인 객단가</button>
+            <button type="button" class="yd-btn" data-metric="clubhouse">클럽하우스</button>
+            <button type="button" class="yd-btn" data-metric="starthouse">스타트하우스</button>
+          </div>
+          <div class="yd-fgroup" role="group" aria-label="막대 표시">
+            <span class="yd-flabel">막대</span>
+            <button type="button" class="yd-btn" data-view="mix">사이트 비중</button>
+            <button type="button" class="yd-btn" data-view="amount">금액 규모</button>
+          </div>
+          <button type="button" class="yd-btn yd-reset" id="yd-reset" hidden>필터 초기화</button>
+        </nav>
+
+        <section class="yd-kpis" id="kpis" aria-label="핵심 지표"></section>
+
+        <div class="yd-grid2">
+          <section class="yd-card" id="monthly">
+            <div class="yd-head-row">
+              <h2>월별 사이트 매출</h2>
+              <div class="yd-legend">
+                <span><i class="yd-sw" data-site="0"></i>클럽하우스</span>
+                <span><i class="yd-sw" data-site="1"></i>스타트하우스</span>
+                <span><i class="yd-sw" data-site="2"></i>그늘집</span>
+              </div>
+            </div>
+            <p class="yd-note">막대를 누르면 그 달만 골라 아래 순위가 다시 계산됩니다. 여러 달을 함께 고를 수 있습니다.</p>
+            <div class="yd-chart dash-skeleton" id="yd-monthly"></div>
+          </section>
+          <section class="yd-card" id="tiers">
+            <h2>순위 구간별 사이트 구성</h2>
+            <p class="yd-note">선택 기간 총매출 순위로 상위 20 · 중위 · 하위 20을 나눴습니다. 객단가는 총매출 ÷ 방문 인원, 후식사는 클럽하우스 후식 매출이 있는 단체입니다.</p>
+            <div class="yd-tiers dash-skeleton" id="yd-tiers"></div>
+          </section>
+        </div>
+
+        <div class="yd-grid2">
+          <section class="yd-card" id="top20">
+            <div class="yd-head-row"><h2 id="yd-top-title">상위 20</h2><span class="yd-count" id="yd-top-sub"></span></div>
+            <div class="yd-cols" aria-hidden="true"><span>순위</span><span>단체명</span><span class="yd-col-bar">사이트 비중</span><span class="yd-col-val">총매출(만원)</span></div>
+            <div class="yd-race dash-skeleton" id="yd-top"></div>
+          </section>
+          <section class="yd-card" id="bottom20">
+            <div class="yd-head-row"><h2 id="yd-bot-title">하위 20</h2><span class="yd-count" id="yd-bot-sub"></span></div>
+            <div class="yd-cols" aria-hidden="true"><span>순위</span><span>단체명</span><span class="yd-col-bar">사이트 비중</span><span class="yd-col-val">총매출(만원)</span></div>
+            <div class="yd-race dash-skeleton" id="yd-bot"></div>
+          </section>
+        </div>
+
+        <section class="yd-card yd-detail" id="detail" hidden>
+          <div class="yd-detail-top">
+            <h2 id="yd-d-name"></h2>
+            <span class="yd-count" id="yd-d-sub"></span>
+            <button type="button" class="yd-btn yd-close" id="yd-d-close">닫기</button>
+          </div>
+          <div class="yd-dstats" id="yd-d-stats"></div>
+          <p class="yd-note">방문 회차별 매출입니다. 선택 기간 밖의 회차는 흐리게 표시합니다.</p>
+          <div class="yd-chart yd-chart-sm" id="yd-d-chart"></div>
+        </section>
+
+        <section class="yd-card" id="map">
+          <div class="yd-head-row">
+            <h2>단체 포지셔닝 맵</h2>
+            <div class="yd-legend">
+              <span><i class="yd-dot" data-tier="top"></i>상위 20</span>
+              <span><i class="yd-dot" data-tier="mid"></i>중위</span>
+              <span><i class="yd-dot" data-tier="bottom"></i>하위 20</span>
+              <span>원 크기 = 총매출</span>
+            </div>
+          </div>
+          <p class="yd-note">가로는 1인 객단가, 세로는 클럽하우스 비중입니다. 점선은 전체 평균입니다. 왼쪽 아래가 클럽하우스 식사 전환이 필요한 단체입니다. 원을 누르면 단체 상세가 열립니다.</p>
+          <div class="yd-chart yd-chart-lg dash-skeleton" id="yd-map"></div>
+        </section>
+
+        <section class="yd-card" id="all-groups">
+          <div class="yd-head-row">
+            <h2>전체 단체 순위표</h2>
+            <span class="yd-count" id="yd-count"></span>
+          </div>
+          <p class="yd-note">선택 기간 기준입니다. 머리글을 누르면 정렬되고, 행을 누르면 상세가 열립니다. 금액 단위는 원입니다.</p>
+          <input id="yd-search" class="yd-search" type="search" placeholder="단체명 검색" aria-label="단체명 검색">
+          <div class="yd-tablebox">
+            <table class="yd-table">
+              <thead><tr>
+                <th><button type="button" data-sort="rank">순위</button></th>
+                <th class="yd-l"><button type="button" data-sort="group">단체명</button></th>
+                <th class="yd-l"><button type="button" data-sort="status">상태</button></th>
+                <th><button type="button" data-sort="visits">방문</button></th>
+                <th><button type="button" data-sort="pax">인원</button></th>
+                <th><button type="button" data-sort="pre">클럽 전식</button></th>
+                <th><button type="button" data-sort="post">클럽 후식</button></th>
+                <th><button type="button" data-sort="starthouse">스타트하우스</button></th>
+                <th><button type="button" data-sort="shade">그늘집</button></th>
+                <th><button type="button" data-sort="total">총매출</button></th>
+                <th><button type="button" data-sort="ch_share">클럽 비중</button></th>
+                <th><button type="button" data-sort="st_share">스타트 비중</button></th>
+                <th><button type="button" data-sort="per">1인 객단가</button></th>
+              </tr></thead>
+              <tbody id="yd-tbody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <div class="yd-tip" id="yd-tip" hidden></div>
+      </div>
+    </section>
+
+    <!-- ───────── 자료 ───────── -->
+    <section class="tab" id="tab-data" hidden>
+      <div class="card dcard" id="uploadCard">
+        <h2>엑셀 올리기</h2>
+        <p>「단체팀 식음이용현황」 시트가 든 엑셀을 고르면 바로 읽어서 시트 맨 아래 합계행과 대조합니다. 모두 일치해야 반영할 수 있습니다. 같은 연도 자료는 통째로 교체되므로 몇 번 올려도 중복되지 않습니다.</p>
+        <label class="file-drop" id="fileDrop">
+          <b>엑셀 파일 선택</b>
+          <span>.xlsx · 여기로 끌어 놓아도 됩니다</span>
+          <input type="file" id="fileInput" accept=".xlsx,.xls,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel">
+        </label>
+        <div id="uploadResult" hidden></div>
+      </div>
+
+      <div class="card dcard" id="issuesCard">
+        <h2>확인 필요<span class="count muted" id="issuesN"></span></h2>
+        <p>엑셀과 현장 체크가 어긋난 회차, 후식 1인 기준 미달로 제외된 회차, 달성이 사라졌는데 지급 기록이 남은 건입니다.</p>
+        <div class="list" id="issuesList"></div>
+      </div>
+
+      <div class="card dcard" id="rulesCard">
+        <h2 id="rulesTitle">규칙</h2>
+        <p>후식사 1회로 인정할 최소 금액(후식 금액 ÷ 인원)과 3·6·9 보상 품목입니다. 연도별로 따로 저장됩니다.</p>
+        <form class="rules" id="rulesForm">
+          <div><label class="lbl" for="ruleTh">1인 기준 금액(원)</label><input class="field" id="ruleTh" type="number" inputmode="numeric" min="1000" step="1000" required></div>
+          <div><label class="lbl" for="rule3">3회 보상</label><input class="field" id="rule3" maxlength="40" required></div>
+          <div><label class="lbl" for="rule6">6회 보상</label><input class="field" id="rule6" maxlength="40" required></div>
+          <div><label class="lbl" for="rule9">9회 보상</label><input class="field" id="rule9" maxlength="40" required></div>
+          <div class="btnrow"><button class="btn btn-primary" type="submit">규칙 저장</button></div>
+        </form>
+      </div>
+
+      <div class="card dcard" id="syncCard">
+        <h2>동기화 · 계정</h2>
+        <dl class="kv" id="syncKv"></dl>
+        <div class="btnrow">
+          <button class="btn" id="syncNow" type="button">지금 새로 받기</button>
+          <button class="btn btn-quiet" id="logoutBtn" type="button">로그아웃</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <nav class="tabbar" aria-label="화면">
+    <button type="button" data-tab="promo" aria-current="page">
+      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="6" cy="7" r="2.2"/><circle cx="12" cy="7" r="2.2"/><circle cx="18" cy="7" r="2.2"/><circle cx="6" cy="14" r="2.2"/><circle cx="12" cy="14" r="2.2"/><circle cx="18" cy="14" r="2.2" fill="currentColor"/><path d="M4 20h16"/></svg><b class="badge" id="promoBadge" hidden></b></span>
+      프로모션
+    </button>
+    <button type="button" data-tab="sales">
+      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 20h16"/><path d="M7 16v-5"/><path d="M12 16V6"/><path d="M17 16v-8"/></svg></span>
+      매출
+    </button>
+    <button type="button" data-tab="data">
+      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M12 17v-6"/><path d="M9.5 13.5L12 11l2.5 2.5"/></svg><b class="badge" id="dataBadge" hidden></b></span>
+      자료
+    </button>
+  </nav>
+</div>
+
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js" integrity="sha384-0w2KAL2YHP6wKOkUDzkCDGgVvfmHnj02DHeQ6XcHOgTfFsGyonKOpShMH1x6nk9o" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+<script type="module" src="js/app.js?v=1"></script>
+</body>
+</html>
