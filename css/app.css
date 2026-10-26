@@ -257,9 +257,6 @@ button.hole-main:hover { background: #FAFCFB; }
 .tabbar .badge { position: absolute; transform: translate(14px, -12px); min-width: 18px; height: 18px; padding: 0 5px; border-radius: 9px; background: var(--ink); color: #FFFFFF; font-size: 11px; font-weight: 800; line-height: 18px; }
 
 /* ───────── 매출 ───────── */
-.take { margin: 20px var(--gutter) 0; font-size: 17px; line-height: 1.7; }
-.take b { font-weight: 800; }
-.take .hot { color: var(--bad); }
 .site { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 12px; align-items: baseline; padding: 14px var(--gutter); border-bottom: 1px solid var(--line-soft); }
 .site .k { display: flex; align-items: center; gap: 8px; font-size: 17px; font-weight: 700; }
 .site .k i { width: 12px; height: 12px; border-radius: 3px; flex: none; }
@@ -309,11 +306,17 @@ button.hole-main:hover { background: #FAFCFB; }
 .rdetail .vrow .k { grid-column: 1 / -1; grid-row: 2; font-size: 15px; }
 .rdetail .vrow .a { grid-row: 1; grid-column: 2; color: var(--ink); font-weight: 700; }
 .more { margin: 14px var(--gutter) 0; width: calc(100% - 2 * var(--gutter)); }
-.tiers { display: grid; margin-top: 4px; }
-.trow { display: grid; grid-template-columns: 5.2rem repeat(3, minmax(0, 1fr)); gap: 8px; align-items: center; min-height: 54px; padding: 0 var(--gutter); border-bottom: 1px solid var(--line-soft); font-size: 15px; }
-.trow.h { min-height: 40px; font-size: 14px; color: var(--sub); font-weight: 700; }
-.trow b { font-size: 18px; }
-.trow > :not(:first-child) { text-align: right; }
+/* 상위·하위 20 비교: 지표가 행, 구간이 열 */
+.cmp { display: grid; margin-top: 2px; }
+.cmp-row { display: grid; grid-template-columns: 4.8rem repeat(3, minmax(0, 1fr)); gap: 8px; align-items: baseline; padding: 14px var(--gutter); border-bottom: 1px solid var(--line-soft); }
+.cmp-row .k { font-size: 15px; font-weight: 700; color: var(--sub); line-height: 1.3; }
+.cmp-row .k small { display: block; font-size: 13px; font-weight: 600; }
+.cmp-row .c { text-align: right; font-family: var(--num); font-size: 27px; font-weight: 700; line-height: 1; letter-spacing: 0; color: var(--ink); white-space: nowrap; }
+.cmp-row .c small { font-family: var(--font); font-size: 13px; font-weight: 700; color: var(--sub); margin-left: 1px; letter-spacing: -0.01em; }
+.cmp-row .c.low { color: var(--bad); }
+.cmp-head { padding-top: 10px; padding-bottom: 10px; }
+.cmp-head .c { font-family: var(--font); font-size: 16px; font-weight: 800; letter-spacing: -0.02em; }
+.cmp-head .c small { display: block; margin: 2px 0 0; font-size: 13px; font-weight: 600; }
 
 /* ───────── 자료 ───────── */
 .dsec { padding: 14px var(--gutter) 4px; display: grid; gap: 14px; }

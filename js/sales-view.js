@@ -87,25 +87,12 @@ function draw() {
   const sel = selected();
   const arr = aggregate(sel);
   box.replaceChildren(
-    takeLine(arr),
+    compareBlock(arr),
     el('div', { class: 'split' }, [
-      el('div', {}, [sitesBlock(sel), monthsBlock(), tiersBlock(arr)]),
+      el('div', {}, [sitesBlock(sel), monthsBlock()]),
       el('div', {}, [rankBlock(arr)]),
     ]),
   );
-}
-
-/* 결론 한 문장 */
-function takeLine(arr) {
-  if (arr.length < 40) return el('p', { class: 'take', text: '선택한 기간의 단체가 40곳 미만이라 상위·하위 20 비교는 참고용입니다.' });
-  const all = sum(arr, 'total');
-  const T = tierStats(arr, 'top');
-  const B = tierStats(arr, 'bottom');
-  const b = (t, cls) => el('b', { class: cls, text: t });
-  return el('p', { class: 'take' }, [
-    '상위 20개 단체가 매출의 ', b(pct(T.total / all)), ', 하위 20개 단체는 ', b(pct(B.total / all)), '를 차지합니다. 1인 객단가는 상위 ',
-    b(`${won(T.per)}원`), ', 하위 ', b(`${won(B.per)}원`), '이고, 클럽하우스 후식사를 한 단체는 상위 20 중 ', b(`${T.post}곳`), ', 하위 20 중 ', b(`${B.post}곳`, 'hot'), '입니다.',
-  ]);
 }
 
 /* 업장별 */
@@ -165,19 +152,23 @@ function monthsBlock() {
   return el('section', {}, [head, legend, list]);
 }
 
-/* 상위·하위 20 비교 */
-function tiersBlock(arr) {
-  if (arr.length < 40) return el('div');
+/* 상위 20 · 중위 · 하위 20 비교 — 문장 대신 큰 숫자 표 (지표 = 행, 구간 = 열) */
+function compareBlock(arr) {
+  if (arr.length < 40) return el('p', { class: 'hint', text: '선택한 기간의 단체가 40곳 미만이라 상위·하위 20 비교를 하지 않습니다.' });
   const all = sum(arr, 'total');
-  const row = (label, t) => el('div', { class: 'trow' }, [el('b', { text: label }), el('span', { text: pct(all ? t.total / all : 0) }), el('span', { text: `${won(t.per)}원` }), el('span', { text: `${t.post}/${t.groups}곳` })]);
+  const tiers = [['상위 20', tierStats(arr, 'top')], ['중위', tierStats(arr, 'mid')], ['하위 20', tierStats(arr, 'bottom')]];
+  const cell = (main, unit, cls) => el('span', { class: `c${cls ? ` ${cls}` : ''}` }, [main, unit ? el('small', { text: unit }) : null]);
+  // 단위는 줄 이름에 붙여 칸에는 숫자만 (휴대폰 폭에서 세 칸이 붙지 않게)
+  const row = (label, unit, cells) => el('div', { class: 'cmp-row' }, [el('span', { class: 'k' }, [label, el('small', { text: `(${unit})` })]), ...cells]);
   return el('section', {}, [
     el('h2', { class: 'rule', text: '상위·하위 20 비교' }),
-    el('div', { class: 'tiers' }, [
-      el('div', { class: 'trow h' }, ['구간', '매출 비중', '1인 객단가', '후식 이용'].map((t) => el('span', { text: t }))),
-      row('상위 20', tierStats(arr, 'top')),
-      row('중위', tierStats(arr, 'mid')),
-      row('하위 20', tierStats(arr, 'bottom')),
+    el('div', { class: 'cmp', role: 'table', 'aria-label': '총매출 순위 구간별 비교' }, [
+      el('div', { class: 'cmp-row cmp-head' }, [el('span'), ...tiers.map(([name, t]) => el('span', { class: 'c' }, [name, el('small', { text: `${t.groups}곳` })]))]),
+      row('매출 비중', '%', tiers.map(([, t]) => cell((all ? (t.total / all) * 100 : 0).toFixed(1)))),
+      row('1인 객단가', '원', tiers.map(([, t]) => cell(won(t.per)))),
+      row('후식사 이용', '곳', tiers.map(([name, t]) => cell(`${t.post}`, `/${t.groups}`, name === '하위 20' ? 'low' : null))),
     ]),
+    el('p', { class: 'hint', text: '총매출 순위로 나눈 구간입니다. 후식사 이용 = 클럽하우스 후식 매출이 있는 단체 수.' }),
   ]);
 }
 
