@@ -71,12 +71,12 @@ export function renderSales(data, phase = 'ready') {
 export function salesCover() {
   const sel = selected();
   if (!sel.length) return [el('p', { class: 'cover-sub', text: '확정된 엑셀 자료가 없습니다' })];
-  const dates = sel.map((r) => r.date).sort();
   const groups = new Set(sel.map((r) => r.group)).size;
-  const period = ui.months.length ? ui.months.map((m) => `${m}월`).join('·') : `${fmtDate(dates[0])} ~ ${fmtDate(dates[dates.length - 1])}`;
+  // 이용 기간 날짜는 보여주지 않는다(요한 요청). 달을 골랐을 때만 어느 달인지 표시
+  const period = ui.months.length ? ui.months.map((m) => `${m}월`).join('·') : null;
   return [
     el('div', { class: 'cover-big' }, [man(sum(sel, 'total')), el('small', { text: '만원' })]),
-    el('p', { class: 'cover-sub' }, [period, `단체 ${groups}곳`, `방문 ${won(sel.length)}회`, `인원 ${won(sum(sel, 'pax'))}명`]
+    el('p', { class: 'cover-sub' }, [period, `단체 ${groups}곳`, `방문 ${won(sel.length)}회`, `인원 ${won(sum(sel, 'pax'))}명`].filter(Boolean)
       .map((t) => el('span', { class: 'nowrap', text: t }))),
   ];
 }
