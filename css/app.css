@@ -290,6 +290,11 @@ button.hole-main:hover { background: #FAFCFB; }
 .seg button { flex: 1; min-height: 42px; border: 0; border-radius: 9px; background: none; font-size: 15px; font-weight: 700; color: var(--sub); }
 .seg button[aria-pressed="true"] { background: var(--paper); color: var(--ink); box-shadow: 0 1px 3px rgba(16, 35, 26, 0.15); }
 .rank { display: grid; margin-top: 6px; }
+/* Tabs (밑줄형): 순위 기준(알약형 seg)과 모양을 달리해 '보는 범위' 전환임을 구분 */
+.tabs { display: flex; gap: 4px; margin: 12px var(--gutter) 0; border-bottom: 1.5px solid var(--line); }
+.tabs button { flex: 1; min-height: 48px; padding: 0 8px; border: 0; background: none; font-size: 16px; font-weight: 700; color: var(--sub); border-bottom: 3px solid transparent; margin-bottom: -1.5px; transition: color 160ms, border-color 160ms; }
+.tabs button[aria-selected="true"] { color: var(--green); border-bottom-color: var(--green); }
+.tabs button:hover { color: var(--ink); }
 .rrow { display: grid; grid-template-columns: 2.2rem minmax(0, 1fr) auto; gap: 6px 12px; align-items: center; width: 100%; padding: 14px var(--gutter); border: 0; border-bottom: 1px solid var(--line-soft); background: none; text-align: left; color: inherit; }
 .rrow:hover { background: #FAFCFB; }
 .rrow .r { font-family: var(--num); font-size: 22px; font-weight: 700; color: var(--sub); text-align: right; letter-spacing: 0; }

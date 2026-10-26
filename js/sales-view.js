@@ -15,7 +15,7 @@ const SITES = [
 const METRICS = { total: '총매출', per: '1인 객단가', clubhouse: '클럽하우스' };
 const TOP_N = 20;
 
-const ui = { months: [], metric: 'total', q: '', all: false, open: null };
+const ui = { months: [], metric: 'total', q: '', range: 'top', open: null }; // range: top(상위 20) | bottom(하위 20) | all
 let rows = [];
 let srcRef = null;
 
@@ -63,7 +63,7 @@ const selected = () => rows.filter((r) => !ui.months.length || ui.months.include
 /** 데이터가 바뀌면 다시 계산 (같은 배열이면 필터 상태 유지) */
 export function renderSales(data, phase = 'ready') {
   if (phase !== 'ready') { $('sales').replaceChildren(waiting({ phase, error: null })); return; }
-  if (data !== srcRef) { srcRef = data; rows = parse(data); ui.months = []; ui.open = null; ui.all = false; }
+  if (data !== srcRef) { srcRef = data; rows = parse(data); ui.months = []; ui.open = null; ui.range = 'top'; }
   draw();
 }
 
@@ -180,9 +180,23 @@ function valueText(g) {
 
 function rankBlock(arr) {
   const sorted = arr.slice().sort((a, b) => b[ui.metric] - a[ui.metric] || b.total - a.total);
-  const max = Math.max(1, ...sorted.map((g) => g[ui.metric]));
-  const filtered = sorted.map((g, i) => ({ g, rank: i + 1 })).filter(({ g }) => !ui.q || g.group.includes(ui.q));
-  const shown = ui.all || ui.q ? filtered : filtered.slice(0, TOP_N);
+  const ranked = sorted.map((g, i) => ({ g, rank: i + 1 }));
+  const n = ranked.length;
+  const bottomFrom = Math.max(TOP_N, n - TOP_N); // 하위 20은 상위 20과 겹치지 않게
+  let shown;
+  if (ui.q) shown = ranked.filter(({ g }) => g.group.includes(ui.q)); // 검색은 탭과 무관하게 전체에서
+  else if (ui.range === 'bottom') shown = ranked.slice(bottomFrom);
+  else if (ui.range === 'all') shown = ranked;
+  else shown = ranked.slice(0, TOP_N);
+  // 막대는 지금 보이는 목록 안에서 비교 (하위 20도 막대 길이 차이가 보이게)
+  const max = Math.max(1, ...shown.map(({ g }) => g[ui.metric]));
+
+  // Tabs: 같은 자리에서 보는 범위만 바꾼다 (상위 20 · 하위 20 · 전체)
+  const tabDefs = [['top', '상위 20'], ...(n > TOP_N ? [['bottom', '하위 20']] : []), ['all', `전체 ${n}`]];
+  const tabs = el('div', { class: 'tabs', role: 'tablist', 'aria-label': '순위 범위' }, tabDefs.map(([k, label]) => el('button', {
+    type: 'button', role: 'tab', 'aria-selected': String(!ui.q && ui.range === k),
+    onclick: () => { ui.range = k; ui.open = null; ui.q = ''; redrawRank(arr); },
+  }, label)));
 
   const seg = el('div', { class: 'seg', role: 'group', 'aria-label': '순위 기준' }, Object.entries(METRICS).map(([k, label]) => el('button', {
     type: 'button', 'aria-pressed': String(ui.metric === k), onclick: () => { ui.metric = k; ui.open = null; draw(); },
@@ -202,7 +216,8 @@ function rankBlock(arr) {
     el('input', { class: 'field', id: 'salesSearch', type: 'search', placeholder: '단체명 검색', value: ui.q, autocomplete: 'off', oninput: (e) => { ui.q = e.target.value.trim(); redrawRank(arr); } }),
   ]);
 
-  const list = el('div', { class: 'rank', id: 'rankList' }, shown.flatMap(({ g, rank }) => {
+  const empty = ui.q && !shown.length ? el('p', { class: 'empty', text: `「${ui.q}」에 맞는 단체가 없습니다.` }) : null;
+  const list = el('div', { class: 'rank', id: 'rankList', role: 'tabpanel' }, shown.flatMap(({ g, rank }) => {
     const open = ui.open === g.group;
     const stack = el('span', { class: 'stack amount' }); // 한 색 막대: 길이 = 순위 기준 금액
     const fill = el('i');
@@ -220,13 +235,10 @@ function rankBlock(arr) {
     return open ? [btn, groupDetail(g)] : [btn];
   }));
 
-  const more = !ui.q && filtered.length > TOP_N
-    ? el('button', { type: 'button', class: 'btn more', onclick: () => { ui.all = !ui.all; redrawRank(arr); } }, ui.all ? `상위 ${TOP_N}곳만 보기` : `전체 ${filtered.length}곳 보기`)
-    : null;
 
   return el('section', { id: 'rankSec' }, [
     el('h2', { class: 'rule' }, ['단체 순위', el('span', { class: 'h', text: `${METRICS[ui.metric]} 기준` })]),
-    seg, search, list, more,
+    seg, tabs, search, empty, list,
   ]);
 }
 

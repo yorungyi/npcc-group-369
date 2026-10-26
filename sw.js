@@ -4,13 +4,13 @@
    Supabase 요청은 절대 가로채지 않는다(로그인 토큰이 오가고, 데이터 사본은 store.js가 따로 관리).
    ============================================================ */
 
-const CACHE = 'npcc-grp-v6';
+const CACHE = 'npcc-grp-v7';
 
 const SHELL = [
   './',
   './manifest.webmanifest',
-  './css/app.css?v=5',
-  './js/app.js?v=6',
+  './css/app.css?v=6',
+  './js/app.js?v=7',
   './js/config.js',
   './js/store.js',
   './js/ui.js',
