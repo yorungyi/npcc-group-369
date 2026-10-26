@@ -185,7 +185,7 @@ function rankBlock(arr) {
   const bottomFrom = Math.max(TOP_N, n - TOP_N); // 하위 20은 상위 20과 겹치지 않게
   let shown;
   if (ui.q) shown = ranked.filter(({ g }) => g.group.includes(ui.q)); // 검색은 탭과 무관하게 전체에서
-  else if (ui.range === 'bottom') shown = ranked.slice(bottomFrom);
+  else if (ui.range === 'bottom') shown = ranked.slice(bottomFrom).reverse(); // 하위 20은 매출이 가장 적은 단체부터 (순위 번호는 그대로)
   else if (ui.range === 'all') shown = ranked;
   else shown = ranked.slice(0, TOP_N);
   // 막대는 지금 보이는 목록 안에서 비교 (하위 20도 막대 길이 차이가 보이게)
