@@ -1,7 +1,7 @@
 /* ============================================================
    data-view.js — 자료 탭
    ① 엑셀 올리기: 브라우저에서 바로 읽고 → 시트 합계행 대조 → 일치할 때만 반영
-   ② 확인 필요: 엑셀·현장 체크 불일치, 1인 기준 미달 제외, 달성 없는 지급 기록
+   ② 확인 필요: 1인 기준 미달 제외, 달성 없는 지급 기록, 수동 판정
    ③ 연도별 규칙  ④ 동기화·계정
    ============================================================ */
 
@@ -28,6 +28,7 @@ export function initData({ onLogout }) {
   ['dragleave', 'drop'].forEach((t) => drop.addEventListener(t, () => drop.classList.remove('is-over')));
   drop.addEventListener('drop', (e) => { e.preventDefault(); const f = e.dataTransfer.files[0]; if (f) readFile(f); });
 
+  $('legacyBtn').addEventListener('click', (e) => guard(e.currentTarget, settleLegacy));
   $('rulesForm').addEventListener('submit', (e) => { e.preventDefault(); saveRules(); });
   $('syncNow').addEventListener('click', (e) => guard(e.currentTarget, async () => {
     try { await flush(); await load(); toast('서버에서 새로 받았습니다'); } catch { toast('받지 못했습니다. 연결을 확인해 주세요.'); }
@@ -48,9 +49,28 @@ export function renderData(next) {
     $('rule6').value = ctx.settings.items['6'];
     $('rule9').value = ctx.settings.items['9'];
   }
+  drawLegacy();
   drawIssues();
   drawSync();
   if (parsed) drawUpload();
+}
+
+/* ───────── 앱 도입 전 달성분 정리 (1회) ───────── */
+function drawLegacy() {
+  const n = ctx.promo.groups.reduce((a, g) => a + g.legacyPending.length, 0);
+  $('legacySec').hidden = !n;
+  if (!n) return;
+  $('legacyText').textContent = `${fmtDate(CONFIG.APP_START)} 이전에 달성한 3·6·9 ${n}건은 지급 체크 기록이 없습니다. 이미 지급한 것으로 한 번에 정리합니다(지급일 = 달성일, 메모 「앱 도입 전 지급」).`;
+}
+
+function settleLegacy() {
+  const rows = [];
+  ctx.promo.groups.forEach((g) => g.legacyPending.forEach((m) => {
+    const st = g.rewardState[m];
+    rows.push({ year: ctx.year, group_name: g.name, milestone: m, given_on: st.reached.date, item: st.item, memo: '앱 도입 전 지급', legacy: true });
+  }));
+  rows.forEach((r) => write('grp_rewards', 'upsert', r));
+  toast(`도입 전 달성 ${rows.length}건을 지급 완료로 정리했습니다`, { label: '되돌리기', run: () => rows.forEach((r) => write('grp_rewards', 'delete', r)) });
 }
 
 /* ───────── ① 엑셀 ───────── */
@@ -182,7 +202,7 @@ function drawIssues() {
       return el('div', { class: 'issue' }, [
         el('div', { class: 't' }, [el('b', { text: `${i.group} · ${fmtDate(i.date)}` }), el('span', { class: 'muted', text: '기준 미달 제외' })]),
         el('span', { text: `후식 ${won(i.visit.post)}원 ÷ ${i.visit.pax}명 = 1인 ${won(Math.round(i.visit.perPax))}원 (기준 ${won(ctx.promo.threshold)}원)` }),
-        el('div', { class: 'acts' }, [btn('후식사로 인정', () => setOverride(i.group, i.date, true))]),
+        el('div', { class: 'acts' }, [btn('후식사로 인정', () => setOverride(i.group, i.date, true)), btn('제외 유지', () => setOverride(i.group, i.date, false), 'btn btn-sm btn-quiet')]),
       ]);
     }
     if (i.type === 'mismatch') {
@@ -208,7 +228,7 @@ function drawIssues() {
     el('div', { class: 'acts' }, [el('button', { type: 'button', class: 'btn btn-sm btn-quiet', onclick: (e) => guard(e.currentTarget, () => setOverride(g.name, v.date, null)) }, '수동 판정 취소')]),
   ])));
 
-  $('issuesN').textContent = ` ${ctx.promo.issues.length}`;
+  $('issuesN').textContent = ctx.promo.issues.length;
   const badge = $('dataBadge');
   badge.hidden = !ctx.promo.issues.length;
   badge.textContent = ctx.promo.issues.length;
@@ -240,7 +260,7 @@ function drawSync() {
     ['전송 대기', `${s.pending}건`],
     ['마지막으로 받은 시각', local(ctx.fetchedAt)],
     ['확정 방문 회차 (전체 연도)', `${won(ctx.visits.length)}회`],
-    ['현장 기록 · 지급 기록', `${won(ctx.marks.length)}건 · ${won(ctx.rewards.length)}건`],
+    ['지급 체크 기록', `${won(ctx.rewards.length)}건`],
     ['계정', ctx.email || CONFIG.OWNER_EMAIL],
   ];
   if (s.error) rows.push(['최근 오류', s.error]);

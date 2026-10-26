@@ -1,6 +1,6 @@
 /* ============================================================
    promo-core.js — 계산 규칙 (화면·DB와 무관한 순수 함수)
-   엑셀 해석, 3·6·9 카운트, 다음 방문일 추정이 모두 여기 있다.
+   엑셀 해석과 3·6·9 카운트·순서가 모두 여기 있다.
    tests/promo-core.test.mjs 가 원자료로 이 파일을 검증한다.
    ============================================================ */
 
@@ -128,79 +128,6 @@ export function compareTotals(parsed, sheet) {
   }));
 }
 
-/* ───────── 날짜 계산 (UTC 기준 — 시간대 영향 없음) ───────── */
-
-const DAY = 86400000;
-const toMs = (iso) => Date.UTC(Number(iso.slice(0, 4)), Number(iso.slice(5, 7)) - 1, Number(iso.slice(8, 10)));
-const fromMs = (ms) => { const d = new Date(ms); return `${d.getUTCFullYear()}-${pad(d.getUTCMonth() + 1)}-${pad(d.getUTCDate())}`; };
-export const addDays = (iso, n) => fromMs(toMs(iso) + n * DAY);
-export const daysBetween = (a, b) => Math.round((toMs(b) - toMs(a)) / DAY);
-export const weekdayOf = (iso) => new Date(toMs(iso)).getUTCDay();
-
-/** 그 달의 n째 요일 (없으면 null) */
-function nthWeekday(year, month0, n, wd) {
-  const first = new Date(Date.UTC(year, month0, 1)).getUTCDay();
-  const day = 1 + ((wd - first + 7) % 7) + (n - 1) * 7;
-  const last = new Date(Date.UTC(year, month0 + 1, 0)).getUTCDate();
-  return day > last ? null : `${year}-${pad(month0 + 1)}-${pad(day)}`;
-}
-
-const WD = ['일', '월', '화', '수', '목', '금', '토'];
-const NTH = ['', '첫째', '둘째', '셋째', '넷째', '다섯째'];
-
-/**
- * 다음 방문 예상일. 매월 「n째 주 요일」 패턴이 뚜렷하면 그 패턴으로, 아니면 방문 간격 중앙값으로 추정한다.
- * @param {string[]} dates 방문일(정렬 무관, 중복 허용)
- * @param {string} today 'YYYY-MM-DD'
- * @param {{minShare?: number, minVisits?: number}} [opt]
- * @returns {{ date: string, basis: 'pattern'|'interval', note: string } | null}
- */
-export function predictNext(dates, today, opt = {}) {
-  const minShare = opt.minShare ?? 0.6;
-  const minVisits = opt.minVisits ?? 3;
-  const ds = [...new Set(dates)].sort();
-  if (!ds.length) return null;
-  const last = ds[ds.length - 1];
-  const after = last >= today ? last : addDays(today, -1); // 이 날짜 '이후'의 첫 후보
-
-  const recent = ds.filter((d) => daysBetween(d, last) <= 400);
-  if (recent.length >= minVisits) {
-    const tally = new Map();
-    recent.forEach((d) => {
-      const key = `${Math.ceil(Number(d.slice(8, 10)) / 7)}|${weekdayOf(d)}`;
-      tally.set(key, (tally.get(key) || 0) + 1);
-    });
-    const [bestKey, bestN] = [...tally.entries()].sort((a, b) => b[1] - a[1])[0];
-    if (bestN / recent.length >= minShare) {
-      const [n, wd] = bestKey.split('|').map(Number);
-      let y = Number(after.slice(0, 4));
-      let m0 = Number(after.slice(5, 7)) - 1;
-      for (let i = 0; i < 15; i += 1) {
-        const cand = nthWeekday(y, m0, n, wd);
-        if (cand && cand > after) return { date: cand, basis: 'pattern', note: `매월 ${NTH[n]} ${WD[wd]}요일` };
-        m0 += 1; if (m0 > 11) { m0 = 0; y += 1; }
-      }
-    }
-  }
-
-  if (ds.length >= 2) {
-    const gaps = [];
-    for (let i = 1; i < ds.length; i += 1) {
-      const g = daysBetween(ds[i - 1], ds[i]);
-      if (g >= 7) gaps.push(g);
-    }
-    if (gaps.length) {
-      gaps.sort((a, b) => a - b);
-      const mid = gaps.length >> 1;
-      const gap = gaps.length % 2 ? gaps[mid] : Math.round((gaps[mid - 1] + gaps[mid]) / 2);
-      let next = addDays(last, gap);
-      while (next <= after) next = addDays(next, gap);
-      return { date: next, basis: 'interval', note: `약 ${gap}일 간격` };
-    }
-  }
-  return null;
-}
-
 /* ───────── 3·6·9 카운트 ───────── */
 
 /**
@@ -211,23 +138,15 @@ export function predictNext(dates, today, opt = {}) {
  * @param {object[]} p.marks    grp_marks 행
  * @param {object[]} p.rewards  grp_rewards 행
  * @param {{threshold_per_pax: number, items: Record<string,string>}} p.settings
- * @param {string} p.today
- * @param {string} p.appStart
- * @param {{minShare?: number, minVisits?: number}} [p.predict]
+ * @param {string} p.appStart  이 날짜 전에 달성한 3·6·9는 「도입 전 정리」 대상
  */
-export function buildPromo({ year, visits, marks, rewards, settings, today, appStart, predict }) {
+export function buildPromo({ year, visits, marks, rewards, settings, appStart }) {
   const threshold = Number(settings.threshold_per_pax) || 10000;
   const inYear = (d) => Number(String(d).slice(0, 4)) === year;
   const key = (d, g) => `${d}|${g}`;
 
   const markMap = new Map(marks.map((m) => [key(m.visit_date, m.group_name), m]));
   const excelMap = new Map(visits.filter((v) => inYear(v.visit_date)).map((v) => [key(v.visit_date, v.group_name), v]));
-
-  // 예상일 계산용: 모든 연도의 방문일 (엑셀 + 현장 기록)
-  const allDates = new Map();
-  const addDate = (g, d) => { if (!allDates.has(g)) allDates.set(g, []); allDates.get(g).push(d); };
-  visits.forEach((v) => addDate(v.group_name, v.visit_date));
-  marks.forEach((m) => { if (m.field_post != null) addDate(m.group_name, m.visit_date); });
 
   // 그 해의 방문 회차 = 엑셀 행 ∪ 엑셀에 아직 없는 현장 기록
   const byGroup = new Map();
@@ -300,7 +219,6 @@ export function buildPromo({ year, visits, marks, rewards, settings, today, appS
       name, label, withdrawn, visits: vlist, count: capped, stamps, rewardState,
       next: nextM ? { milestone: nextM, steps: nextM - capped, item: settings.items[String(nextM)] } : null,
       lastVisit,
-      predicted: predictNext(allDates.get(name) || [], today, predict),
       legacyPending: MILESTONES.filter((m) => rewardState[m].status === 'pending' && rewardState[m].reached.date < appStart),
     });
   });
@@ -309,26 +227,35 @@ export function buildPromo({ year, visits, marks, rewards, settings, today, appS
   return { year, threshold, groups, issues };
 }
 
-/** 다음 후식사가 3·6·9가 되는 단체 (탈회 제외), 예상일 빠른 순 */
-export function nextRewardGroups(groups) {
-  return groups
-    .filter((g) => !g.withdrawn && g.next && g.next.steps === 1)
-    .sort((a, b) => (a.predicted?.date || '9999').localeCompare(b.predicted?.date || '9999') || a.name.localeCompare(b.name, 'ko'));
-}
+/** 같은 칸 안 정렬: 큰 보상 먼저 → 후식 많은 순 → 가나다 */
+const byReward = (a, b) => (b.next?.milestone || 0) - (a.next?.milestone || 0) || b.count - a.count || a.name.localeCompare(b.name, 'ko');
 
-/** 달성했지만 지급 체크가 없는 건 (탈회 단체 포함 — 이력 확인용) */
-export function pendingRewards(groups) {
-  const out = [];
-  groups.forEach((g) => MILESTONES.forEach((m) => {
-    const s = g.rewardState[m];
-    if (s.status === 'pending') out.push({ group: g, milestone: m, reachedOn: s.reached.date, item: s.item, provisional: s.reached.provisional });
+/**
+ * 3·6·9 탭의 목록 구성.
+ * achieved — 달성했는데 지급 체크가 없는 건(도입 전 달성분 제외), 맨 위에 둔다
+ * steps    — 다음 보상까지 남은 횟수별 단체 [{ steps: 1, groups }, …]
+ */
+export function promoBoard(groups) {
+  const active = groups.filter((g) => !g.withdrawn);
+  const achieved = [];
+  active.forEach((g) => MILESTONES.forEach((m) => {
+    const st = g.rewardState[m];
+    if (st.status === 'pending' && !g.legacyPending.includes(m)) achieved.push({ group: g, milestone: m, reachedOn: st.reached.date, item: st.item });
   }));
-  return out.sort((a, b) => a.reachedOn.localeCompare(b.reachedOn));
-}
+  achieved.sort((a, b) => b.milestone - a.milestone || a.group.name.localeCompare(b.group.name, 'ko'));
 
-/** 0~9 사다리 칸별 단체 수 (탈회 제외) */
-export function ladder(groups) {
-  const rungs = Array.from({ length: MAX_STAMPS + 1 }, (_, i) => ({ rung: i, groups: [] }));
-  groups.filter((g) => !g.withdrawn).forEach((g) => rungs[g.count].groups.push(g));
-  return rungs;
+  const bySteps = new Map();
+  active.filter((g) => g.next).forEach((g) => {
+    if (!bySteps.has(g.next.steps)) bySteps.set(g.next.steps, []);
+    bySteps.get(g.next.steps).push(g);
+  });
+  const steps = [...bySteps.entries()].sort((a, b) => a[0] - b[0]).map(([n, gs]) => ({ steps: n, groups: gs.sort(byReward) }));
+
+  return {
+    achieved,
+    steps,
+    finished: active.filter((g) => !g.next).sort(byReward),
+    withdrawn: groups.filter((g) => g.withdrawn),
+    legacyCount: groups.reduce((a, g) => a + g.legacyPending.length, 0),
+  };
 }

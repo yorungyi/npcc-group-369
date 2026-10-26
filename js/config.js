@@ -17,10 +17,6 @@ export const CONFIG = {
   DEFAULT_THRESHOLD: 10000,
   DEFAULT_ITEMS: { 3: '생맥주 피쳐', 6: '오늘의 샐러드', 9: '닭날개&감자튀김' },
 
-  /* 다음 방문일 추정: 같은 「몇째 주 무슨 요일」이 이 비율 이상이면 요일 패턴으로 본다 */
-  PATTERN_MIN_SHARE: 0.6,
-  PATTERN_MIN_VISITS: 3,
-
-  /* 오프라인 대기 기록을 다시 보내는 주기(ms) */
+  /* 오프라인 동안 쌓인 지급 체크를 다시 보내는 주기(ms) */
   SYNC_INTERVAL: 30000,
 };

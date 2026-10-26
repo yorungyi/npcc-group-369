@@ -36,15 +36,6 @@ const wdOf = (iso) => new Date(Date.UTC(+iso.slice(0, 4), +iso.slice(5, 7) - 1, 
 /** '2026-11-18' → '11/18(수)' */
 export const fmtDate = (iso) => (iso ? `${+iso.slice(5, 7)}/${+iso.slice(8, 10)}(${WD[wdOf(iso)]})` : '');
 
-/** 오늘과의 차이를 말로: 오늘 · 내일 · 3일 후 · 2일 지남 */
-export function relDay(iso, today) {
-  const diff = Math.round((Date.UTC(+iso.slice(0, 4), +iso.slice(5, 7) - 1, +iso.slice(8, 10)) - Date.UTC(+today.slice(0, 4), +today.slice(5, 7) - 1, +today.slice(8, 10))) / 86400000);
-  if (diff === 0) return '오늘';
-  if (diff === 1) return '내일';
-  if (diff > 1) return `${diff}일 후`;
-  return `${-diff}일 지남`;
-}
-
 export const won = (n) => (Number(n) || 0).toLocaleString('ko-KR');
 
 /* ───────── 토스트 (되돌리기 버튼 포함) ───────── */

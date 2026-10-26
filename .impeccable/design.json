@@ -1,493 +1,411 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-25T20:35:53+09:00",
+  "generatedAt": "2026-10-26T10:00:23+09:00",
   "title": "Design System: 연단체 3·6·9",
   "extensions": {
     "colorMeta": {
-      "page": {
-        "role": "neutral",
-        "displayName": "회청 바탕",
-        "canonical": "oklch(97.1% 0.004 236)",
+      "green": {
+        "role": "primary",
+        "displayName": "페어웨이 그린",
+        "canonical": "#1E4A34",
         "tonalRamp": [
-          "#0A0B0C",
-          "#232425",
-          "#3E4041",
-          "#5C5E5F",
-          "#7E8182",
-          "#A2A5A6",
-          "#C9CBCC",
-          "#EDEFF0"
+          "#001005",
+          "#002E1A",
+          "#204C36",
+          "#406C55",
+          "#618E75",
+          "#83B197",
+          "#A7D6BB",
+          "#CCFCE0"
         ]
       },
-      "panel": {
-        "role": "neutral",
-        "displayName": "카드 흰색",
-        "canonical": "oklch(100.0% 0.000 90)",
+      "green-deep": {
+        "role": "primary",
+        "displayName": "짙은 그린",
+        "canonical": "#173B29",
         "tonalRamp": [
-          "#0B0B0B",
-          "#242424",
-          "#404040",
-          "#5D5D5D",
-          "#808080",
-          "#A4A4A4",
-          "#CACACA",
-          "#EEEEEE"
+          "#001005",
+          "#072D1C",
+          "#274B38",
+          "#466B57",
+          "#678C77",
+          "#89B099",
+          "#ACD4BD",
+          "#D1FAE2"
+        ]
+      },
+      "green-2": {
+        "role": "primary",
+        "displayName": "두 번째 그린",
+        "canonical": "#2D5C44",
+        "tonalRamp": [
+          "#001005",
+          "#012E1B",
+          "#1D4D35",
+          "#3E6D54",
+          "#5F8F75",
+          "#81B297",
+          "#A5D7BA",
+          "#C9FDDF"
         ]
       },
       "ink": {
-        "role": "primary",
-        "displayName": "노스팜 잉크",
-        "canonical": "oklch(26.8% 0.023 249)",
+        "role": "neutral",
+        "displayName": "잉크",
+        "canonical": "#10231A",
         "tonalRamp": [
-          "#070C11",
-          "#1E252C",
-          "#38414A",
-          "#545F6A",
-          "#76828D",
-          "#9BA6B1",
-          "#C2CCD6",
-          "#E7F0F8"
+          "#010F07",
+          "#172A21",
+          "#33473D",
+          "#52675C",
+          "#72887D",
+          "#95AB9F",
+          "#B8D0C3",
+          "#DDF5E8"
         ]
       },
-      "muted": {
+      "sub": {
         "role": "neutral",
         "displayName": "보조 잉크",
-        "canonical": "oklch(51.5% 0.024 248)",
+        "canonical": "#3F5248",
         "tonalRamp": [
-          "#060C11",
-          "#1D252C",
-          "#38414A",
-          "#545F6A",
-          "#76828E",
-          "#9BA6B1",
-          "#C2CCD6",
-          "#E7F0F9"
+          "#010F07",
+          "#182A21",
+          "#34473D",
+          "#53675C",
+          "#74887D",
+          "#96AB9F",
+          "#B9CFC3",
+          "#DEF5E9"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "종이",
+        "canonical": "#FFFFFF",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#A5A5A5",
+          "#C9C9C9",
+          "#EEEEEE"
+        ]
+      },
+      "page": {
+        "role": "neutral",
+        "displayName": "연한 바닥",
+        "canonical": "#F4F6F5",
+        "tonalRamp": [
+          "#0A0B0B",
+          "#242525",
+          "#414242",
+          "#606261",
+          "#818382",
+          "#A4A5A4",
+          "#C8CAC9",
+          "#EDEFEE"
+        ]
+      },
+      "wash": {
+        "role": "neutral",
+        "displayName": "물빛",
+        "canonical": "#EEF3F0",
+        "tonalRamp": [
+          "#090C0A",
+          "#222624",
+          "#3F4341",
+          "#5E6260",
+          "#7F8481",
+          "#A2A6A3",
+          "#C6CAC8",
+          "#EBF0ED"
         ]
       },
       "line": {
         "role": "neutral",
-        "displayName": "카드 테두리",
-        "canonical": "oklch(92.6% 0.009 248)",
+        "displayName": "헤어라인",
+        "canonical": "#D5DED8",
         "tonalRamp": [
-          "#090B0D",
-          "#222427",
-          "#3D4043",
-          "#5A5E62",
-          "#7C8185",
-          "#A1A5A9",
-          "#C7CBCE",
-          "#ECEFF2"
+          "#070D09",
+          "#202723",
+          "#3D443F",
+          "#5C635E",
+          "#7C857F",
+          "#9FA7A2",
+          "#C3CCC6",
+          "#E8F1EB"
         ]
       },
-      "line-2": {
+      "line-soft": {
         "role": "neutral",
-        "displayName": "입력 테두리",
-        "canonical": "oklch(91.0% 0.010 248)",
+        "displayName": "연한 헤어라인",
+        "canonical": "#E7EDE9",
         "tonalRamp": [
-          "#090B0E",
-          "#212428",
-          "#3C4044",
-          "#595E63",
-          "#7C8186",
-          "#A0A5AA",
-          "#C7CBCF",
-          "#EBEFF3"
+          "#080C0A",
+          "#222623",
+          "#3F4340",
+          "#5E635F",
+          "#7E8480",
+          "#A1A7A3",
+          "#C5CBC7",
+          "#EAF0EC"
         ]
       },
-      "grid": {
-        "role": "neutral",
-        "displayName": "격자 회색",
-        "canonical": "oklch(95.9% 0.006 240)",
+      "flag": {
+        "role": "secondary",
+        "displayName": "깃발 주황",
+        "canonical": "#C4541F",
         "tonalRamp": [
-          "#0A0B0D",
-          "#222426",
-          "#3D4042",
-          "#5B5E60",
-          "#7D8183",
-          "#A2A5A7",
-          "#C8CBCD",
-          "#ECEFF1"
+          "#200000",
+          "#441200",
+          "#712700",
+          "#A03E0B",
+          "#CD5C28",
+          "#F4804F",
+          "#FDB699",
+          "#FFE9E1"
         ]
       },
-      "axis": {
-        "role": "neutral",
-        "displayName": "축 회색",
-        "canonical": "oklch(80.9% 0.018 248)",
+      "flag-ink": {
+        "role": "secondary",
+        "displayName": "깃발 잉크",
+        "canonical": "#A8441A",
         "tonalRamp": [
-          "#080C10",
-          "#1F252A",
-          "#3A4147",
-          "#565F67",
-          "#78818A",
-          "#9DA6AE",
-          "#C4CBD3",
-          "#E9EFF6"
+          "#200000",
+          "#451200",
+          "#722602",
+          "#A13D11",
+          "#C76039",
+          "#EE845C",
+          "#FEB59B",
+          "#FDEAE3"
         ]
       },
-      "rest": {
-        "role": "neutral",
-        "displayName": "쉼 회색",
-        "canonical": "oklch(83.6% 0.012 248)",
+      "flag-wash": {
+        "role": "secondary",
+        "displayName": "깃발 바탕",
+        "canonical": "#FFF1E6",
         "tonalRamp": [
-          "#090B0E",
-          "#212428",
-          "#3C4045",
-          "#595E64",
-          "#7B8187",
-          "#A0A5AB",
-          "#C6CBD0",
-          "#EAEFF4"
+          "#120904",
+          "#2D231B",
+          "#4B4037",
+          "#6A5F55",
+          "#8C8076",
+          "#AFA298",
+          "#D4C6BC",
+          "#FAECE1"
+        ]
+      },
+      "flag-line": {
+        "role": "secondary",
+        "displayName": "깃발 선",
+        "canonical": "#F0CDB4",
+        "tonalRamp": [
+          "#1A0400",
+          "#381E08",
+          "#573B26",
+          "#785A44",
+          "#9B7B64",
+          "#BF9D86",
+          "#E4C1A9",
+          "#FEEADD"
+        ]
+      },
+      "flag-on-green": {
+        "role": "secondary",
+        "displayName": "그린 위 깃발",
+        "canonical": "#FFB27A",
+        "tonalRamp": [
+          "#1B0400",
+          "#3D1A00",
+          "#663200",
+          "#914D0B",
+          "#B66E36",
+          "#DC915A",
+          "#FDB886",
+          "#FFEADC"
         ]
       },
       "bad": {
-        "role": "status",
-        "displayName": "오류 빨강",
-        "canonical": "oklch(57.3% 0.168 29)",
+        "role": "neutral",
+        "displayName": "경고 빨강",
+        "canonical": "#B3261E",
         "tonalRamp": [
-          "#230000",
-          "#460B08",
-          "#6B261F",
-          "#924137",
-          "#BB6358",
-          "#DD8C80",
-          "#FFB5AA",
-          "#FFDCD1"
-        ]
-      },
-      "warn": {
-        "role": "status",
-        "displayName": "주의 갈색 주황",
-        "canonical": "oklch(56.3% 0.128 64)",
-        "tonalRamp": [
-          "#1F0100",
-          "#401600",
-          "#633100",
-          "#884D00",
-          "#AF702C",
-          "#D1975E",
-          "#F4BF8D",
-          "#FFE4B9"
+          "#210000",
+          "#4C0202",
+          "#7D0E0A",
+          "#B0221B",
+          "#D84C3F",
+          "#F97969",
+          "#FCB5AA",
+          "#FEE9E5"
         ]
       },
       "ok": {
-        "role": "status",
-        "displayName": "정상 초록",
-        "canonical": "oklch(52.9% 0.119 156)",
-        "tonalRamp": [
-          "#001300",
-          "#002F10",
-          "#004E28",
-          "#106F42",
-          "#3D9463",
-          "#6DB88A",
-          "#9CDCB3",
-          "#C6FED9"
-        ]
-      },
-      "r3": {
-        "role": "secondary",
-        "displayName": "피쳐 호박색",
-        "canonical": "oklch(65.4% 0.143 63)",
-        "tonalRamp": [
-          "#1F0100",
-          "#401600",
-          "#633100",
-          "#894D00",
-          "#AF702C",
-          "#D2965E",
-          "#F4BE8E",
-          "#FFE4B9"
-        ]
-      },
-      "r3-ink": {
-        "role": "secondary",
-        "displayName": "피쳐 호박색 글자",
-        "canonical": "oklch(48.6% 0.111 63)",
-        "tonalRamp": [
-          "#1E0200",
-          "#3E1800",
-          "#613200",
-          "#864F0D",
-          "#AC7136",
-          "#CE9865",
-          "#F1C093",
-          "#FFE5BE"
-        ]
-      },
-      "r3-tint": {
-        "role": "secondary",
-        "displayName": "피쳐 호박색 바탕",
-        "canonical": "oklch(96.0% 0.023 76)",
-        "tonalRamp": [
-          "#0F0A05",
-          "#29231B",
-          "#463E34",
-          "#655C50",
-          "#887F72",
-          "#ACA397",
-          "#D1C9BF",
-          "#F4EDE4"
-        ]
-      },
-      "r6": {
-        "role": "secondary",
-        "displayName": "샐러드 초록",
-        "canonical": "oklch(56.8% 0.117 165)",
-        "tonalRamp": [
-          "#001304",
-          "#003019",
-          "#004F33",
-          "#00704E",
-          "#2A9570",
-          "#63B896",
-          "#94DDBD",
-          "#C0FFE3"
-        ]
-      },
-      "r6-ink": {
-        "role": "secondary",
-        "displayName": "샐러드 초록 글자",
-        "canonical": "oklch(46.2% 0.095 165)",
-        "tonalRamp": [
-          "#001205",
-          "#002E1B",
-          "#004D35",
-          "#1D6D51",
-          "#449172",
-          "#72B598",
-          "#9FDABF",
-          "#C9FCE4"
-        ]
-      },
-      "r6-tint": {
-        "role": "secondary",
-        "displayName": "샐러드 초록 바탕",
-        "canonical": "oklch(95.0% 0.020 173)",
-        "tonalRamp": [
-          "#060D0B",
-          "#1D2623",
-          "#37433F",
-          "#54615C",
-          "#75847F",
-          "#9BA8A3",
-          "#C2CEC9",
-          "#E7F1ED"
-        ]
-      },
-      "r9": {
-        "role": "secondary",
-        "displayName": "닭날개 주홍",
-        "canonical": "oklch(60.9% 0.162 34)",
-        "tonalRamp": [
-          "#230000",
-          "#460C02",
-          "#6B2719",
-          "#924231",
-          "#BA6552",
-          "#DD8D7B",
-          "#FFB6A5",
-          "#FFDDCD"
-        ]
-      },
-      "r9-ink": {
-        "role": "secondary",
-        "displayName": "닭날개 주홍 글자",
-        "canonical": "oklch(49.9% 0.147 34)",
-        "tonalRamp": [
-          "#230000",
-          "#460C02",
-          "#6B2718",
-          "#924231",
-          "#BA6551",
-          "#DC8D7A",
-          "#FFB6A5",
-          "#FFDDCD"
-        ]
-      },
-      "r9-tint": {
-        "role": "secondary",
-        "displayName": "닭날개 주홍 바탕",
-        "canonical": "oklch(94.5% 0.022 35)",
-        "tonalRamp": [
-          "#110907",
-          "#2B211F",
-          "#493C39",
-          "#695A56",
-          "#8C7C78",
-          "#B0A19D",
-          "#D5C7C3",
-          "#F8EBE8"
-        ]
-      },
-      "site-blue": {
-        "role": "tertiary",
-        "displayName": "사이트 파랑",
-        "canonical": "oklch(59.4% 0.141 256)",
-        "tonalRamp": [
-          "#00082A",
-          "#00234D",
-          "#153F73",
-          "#2E5E9B",
-          "#4F82C3",
-          "#79A7E4",
-          "#A4CEFF",
-          "#CDF2FF"
-        ]
-      },
-      "tier-indigo": {
-        "role": "tertiary",
-        "displayName": "상위 남색",
-        "canonical": "oklch(54.7% 0.179 277)",
-        "tonalRamp": [
-          "#07032A",
-          "#1B1C4E",
-          "#333874",
-          "#4E569C",
-          "#6F79C4",
-          "#949FE4",
-          "#BBC6FF",
-          "#E1EBFF"
-        ]
-      },
-      "ink-hover": {
-        "role": "primary",
-        "displayName": "노스팜 잉크 hover",
-        "canonical": "#2B3845",
-        "tonalRamp": [
-          "#070C11",
-          "#1E252C",
-          "#38414A",
-          "#545F6A",
-          "#76828D",
-          "#9BA6B1",
-          "#C2CCD6",
-          "#E7F0F8"
-        ]
-      },
-      "zebra": {
         "role": "neutral",
-        "displayName": "줄무늬 흰색",
-        "canonical": "#F8FAFB",
+        "displayName": "일치 초록",
+        "canonical": "#1E6B45",
         "tonalRamp": [
-          "#0A0B0C",
-          "#232425",
-          "#3E4041",
-          "#5C5E5F",
-          "#7E8182",
-          "#A2A5A6",
-          "#C9CBCC",
-          "#EDEFF0"
+          "#001104",
+          "#002E18",
+          "#054F2F",
+          "#26714B",
+          "#4B946B",
+          "#6EB88D",
+          "#92DDB1",
+          "#C8FEDC"
+        ]
+      },
+      "site-ch": {
+        "role": "tertiary",
+        "displayName": "클럽하우스",
+        "canonical": "#1E4A34",
+        "tonalRamp": [
+          "#001005",
+          "#002E1A",
+          "#204C36",
+          "#406C55",
+          "#618E75",
+          "#83B197",
+          "#A7D6BB",
+          "#CCFCE0"
+        ]
+      },
+      "site-st": {
+        "role": "tertiary",
+        "displayName": "스타트하우스",
+        "canonical": "#D08A2E",
+        "tonalRamp": [
+          "#170600",
+          "#371F00",
+          "#5D3906",
+          "#885400",
+          "#B57100",
+          "#DB943A",
+          "#FCBA6F",
+          "#FEEBD7"
+        ]
+      },
+      "site-sh": {
+        "role": "tertiary",
+        "displayName": "그늘집",
+        "canonical": "#4A86C5",
+        "tonalRamp": [
+          "#000A23",
+          "#012648",
+          "#094376",
+          "#2764A0",
+          "#4A86C5",
+          "#6CA9EB",
+          "#A1CEFF",
+          "#E3F0FE"
         ]
       }
     },
     "typographyMeta": {
+      "display": {
+        "displayName": "표지 큰 숫자",
+        "purpose": "매출·자료 탭 표지 합계."
+      },
+      "yardage": {
+        "displayName": "남은 거리 숫자",
+        "purpose": "단체 페이지 오른쪽 남은 횟수."
+      },
+      "count": {
+        "displayName": "표지 카운트",
+        "purpose": "표지의 탭 가능한 세 카운트."
+      },
+      "figure": {
+        "displayName": "2차 숫자",
+        "purpose": "매출 금액, 순위, 머리줄 개수."
+      },
       "headline": {
-        "displayName": "Headline",
-        "purpose": "매출 탭 제목, KPI 값, 단체 상세 이름."
+        "displayName": "표지 제목",
+        "purpose": "탭 제목."
       },
       "title": {
-        "displayName": "Title",
-        "purpose": "상단바 화면 제목."
+        "displayName": "단체명",
+        "purpose": "단체 페이지 이름."
       },
-      "section": {
-        "displayName": "Section",
-        "purpose": "구역 제목, 사다리 제목, 단체 카드 이름, 자료 카드 제목."
+      "rule": {
+        "displayName": "칸 머리줄",
+        "purpose": "칸 구분 제목."
       },
       "body": {
-        "displayName": "Body",
-        "purpose": "기본 본문과 버튼. 입력은 16px."
+        "displayName": "본문",
+        "purpose": "기본 본문과 입력."
       },
       "body-sm": {
-        "displayName": "Body small",
-        "purpose": "칩, 힌트성 본문, 표, 토스트, 넓은 화면 탭 알약."
+        "displayName": "작은 본문",
+        "purpose": "상세·방문·보상 줄, 버튼."
       },
       "label": {
-        "displayName": "Label",
-        "purpose": "부제, 범례, 캡션, 표 머리글."
+        "displayName": "라벨",
+        "purpose": "입력 라벨, 표지 메타, 범례."
       },
-      "micro": {
-        "displayName": "Micro",
-        "purpose": "하단 탭 글자, 사다리 칸 이름, 태그, 차트 눈금."
+      "caption": {
+        "displayName": "단위·표 머리",
+        "purpose": "큰 글자 옆 단위, 표 머리."
       }
     },
     "shadows": [
       {
-        "name": "shadow",
-        "value": "0 1px 2px rgba(29, 39, 49, 0.05), 0 4px 12px rgba(29, 39, 49, 0.04)",
-        "purpose": "카드 휴식. 모든 앱 카드와 단체 카드."
+        "name": "toast",
+        "value": "0 10px 30px rgba(16, 35, 26, 0.3)",
+        "purpose": "토스트, 떠 있는 유일한 층."
       },
       {
-        "name": "shadow-lift",
-        "value": "0 2px 4px rgba(29, 39, 49, 0.06), 0 12px 28px rgba(29, 39, 49, 0.10)",
-        "purpose": "토스트, 단체 카드 반짝임의 시작."
+        "name": "tick-hover",
+        "value": "0 2px 6px rgba(16, 35, 26, 0.12)",
+        "purpose": "체크 버튼 hover."
       },
       {
-        "name": "shadow-popover",
-        "value": "0 8px 24px rgba(29, 39, 49, 0.12)",
-        "purpose": "매출 탭 차트 툴팁."
+        "name": "seg-selected",
+        "value": "0 1px 3px rgba(16, 35, 26, 0.15)",
+        "purpose": "세그먼트 선택 칸."
       },
       {
-        "name": "reward-ring",
-        "value": "0 0 0 1px var(--rc), var(--shadow)",
-        "purpose": "지급 대기 카드의 보상색 고리."
+        "name": "field-focus",
+        "value": "0 0 0 3px rgba(30, 74, 52, 0.15)",
+        "purpose": "입력칸 포커스 링."
       }
     ],
     "motion": [
       {
         "name": "ease",
         "value": "cubic-bezier(0.16, 1, 0.3, 1)",
-        "purpose": "모든 상태 전환의 단일 이징."
+        "purpose": "모든 상태 전환의 기본 감속 곡선."
       },
       {
-        "name": "press",
-        "value": "transform 120ms var(--ease)",
-        "purpose": "버튼 누름 scale(0.97)."
-      },
-      {
-        "name": "rung-grow",
-        "value": "height 420ms var(--ease)",
-        "purpose": "사다리 막대 높이 변화."
-      },
-      {
-        "name": "stamp",
-        "value": "520ms var(--ease)",
-        "purpose": "스탬프 찍힘: scale 1.9 → 0.9 → 1."
-      },
-      {
-        "name": "target",
-        "value": "1.6s var(--ease) infinite",
-        "purpose": "다음 목표 스탬프의 보상색 맥박."
-      },
-      {
-        "name": "flash",
-        "value": "900ms var(--ease)",
-        "purpose": "기록 직후 단체 카드 반짝임."
+        "name": "button-press",
+        "value": "transform 120ms",
+        "purpose": "버튼 눌림 scale(0.97)."
       },
       {
         "name": "toast-in",
-        "value": "260ms var(--ease)",
-        "purpose": "토스트가 위에서 12px 내려오며 등장."
+        "value": "260ms",
+        "purpose": "토스트가 12px 아래에서 올라옴."
       },
       {
-        "name": "cds-dur-slow",
-        "value": "240ms",
-        "purpose": "매출 탭 필터·상세 패널 전환."
+        "name": "row-flash",
+        "value": "1100ms",
+        "purpose": "체크 후 행이 새 자리에서 #DCEFE3 → 흰색으로 한 번 빛남."
+      },
+      {
+        "name": "fold",
+        "value": "200ms",
+        "purpose": "접는 칸 꺾쇠 회전."
       },
       {
         "name": "reduced-motion",
         "value": "1ms",
-        "purpose": "prefers-reduced-motion에서 모든 애니메이션·전환 시간."
+        "purpose": "prefers-reduced-motion에서 모든 전환과 애니메이션."
       }
     ],
     "breakpoints": [
-      {
-        "name": "container-sm",
-        "value": "460px"
-      },
-      {
-        "name": "sales-table-flow",
-        "value": "640px"
-      },
       {
         "name": "wide",
         "value": "900px"
@@ -496,146 +414,141 @@
   },
   "components": [
     {
-      "name": "주 버튼",
+      "name": "실선 버튼",
       "kind": "button",
       "refersTo": "button-primary",
-      "description": "묶음 안 하나뿐인 주 동작. 「후식 진행」, 「로그인」, 「규칙 저장」.",
-      "html": "<button class=\"ds-btn ds-btn-primary\">후식 진행</button>",
-      "css": ":host{--page:#F3F6F8;--panel:#FFFFFF;--ink:#1D2731;--muted:#5D6975;--line:#E2E7EC;--line-2:#DCE2E8;--grid:#EEF2F5;--axis:#B8C2CC;--rest:#C3CAD1;--r3:#CC7A14;--r3-ink:#8A4F00;--r3-tint:#FBF0E1;--r6:#0B8C66;--r6-ink:#06694B;--r6-tint:#E2F3ED;--r9:#D2563C;--r9-ink:#A63A23;--r9-tint:#FBE8E3;--font:'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;--shadow:0 1px 2px rgba(29,39,49,0.05),0 4px 12px rgba(29,39,49,0.04);--shadow-lift:0 2px 4px rgba(29,39,49,0.06),0 12px 28px rgba(29,39,49,0.10);--ease:cubic-bezier(0.16,1,0.3,1);font-family:var(--font);font-variant-numeric:tabular-nums;color:var(--ink);} [data-r=\"3\"]{--rc:var(--r3);--rc-ink:var(--r3-ink);--rc-tint:var(--r3-tint);} [data-r=\"6\"]{--rc:var(--r6);--rc-ink:var(--r6-ink);--rc-tint:var(--r6-tint);} [data-r=\"9\"]{--rc:var(--r9);--rc-ink:var(--r9-ink);--rc-tint:var(--r9-tint);} .ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:0 16px;border-radius:8px;border:1px solid var(--line-2);background:var(--panel);color:var(--ink);font:500 15px var(--font);white-space:nowrap;cursor:pointer;transition:background 160ms,border-color 160ms,transform 120ms var(--ease);} .ds-btn:hover{border-color:var(--axis);} .ds-btn:active{transform:scale(0.97);} .ds-btn:focus-visible{outline:2px solid var(--ink);outline-offset:2px;} .ds-btn-primary{background:var(--ink);border-color:var(--ink);color:#FFFFFF;} .ds-btn-primary:hover{background:#2B3845;border-color:#2B3845;}"
+      "description": "주요 동작(로그인, 규칙 저장, 한 번에 정리).",
+      "html": "<button class=\"ds-btn ds-btn-solid\">규칙 저장</button>",
+      "css": ":host{--paper:#FFFFFF;--page:#F4F6F5;--green:#1E4A34;--green-2:#2D5C44;--ink:#10231A;--sub:#3F5248;--line:#D5DED8;--line-soft:#E7EDE9;--wash:#EEF3F0;--flag:#C4541F;--flag-ink:#A8441A;--flag-wash:#FFF1E6;--flag-line:#F0CDB4;--font:'Pretendard Variable',Pretendard,-apple-system,'Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;--num:'Barlow Condensed','Pretendard Variable',Pretendard,sans-serif;--ease:cubic-bezier(0.16,1,0.3,1);} .ds-btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 18px;border-radius:10px;border:1.5px solid var(--green);font-size:16px;font-weight:700;cursor:pointer;transition:background 160ms,transform 120ms var(--ease);font-family:var(--font);} .ds-btn-solid{background:var(--green);color:#FFFFFF;} .ds-btn-solid:hover{background:#173B29;} .ds-btn:active{transform:scale(0.97);} .ds-btn:focus-visible{outline:3px solid var(--flag);outline-offset:2px;}"
     },
     {
-      "name": "기본 · 조용한 버튼",
+      "name": "외곽선 버튼",
       "kind": "button",
-      "refersTo": "button",
-      "description": "보조 동작(「방문만」)과 되돌리는 동작(「로그아웃」, 「지급 취소」).",
-      "html": "<div style=\"display:flex;gap:8px\"><button class=\"ds-btn\">방문만</button><button class=\"ds-btn ds-btn-quiet\">로그아웃</button></div>",
-      "css": ":host{--page:#F3F6F8;--panel:#FFFFFF;--ink:#1D2731;--muted:#5D6975;--line:#E2E7EC;--line-2:#DCE2E8;--grid:#EEF2F5;--axis:#B8C2CC;--rest:#C3CAD1;--r3:#CC7A14;--r3-ink:#8A4F00;--r3-tint:#FBF0E1;--r6:#0B8C66;--r6-ink:#06694B;--r6-tint:#E2F3ED;--r9:#D2563C;--r9-ink:#A63A23;--r9-tint:#FBE8E3;--font:'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;--shadow:0 1px 2px rgba(29,39,49,0.05),0 4px 12px rgba(29,39,49,0.04);--shadow-lift:0 2px 4px rgba(29,39,49,0.06),0 12px 28px rgba(29,39,49,0.10);--ease:cubic-bezier(0.16,1,0.3,1);font-family:var(--font);font-variant-numeric:tabular-nums;color:var(--ink);} [data-r=\"3\"]{--rc:var(--r3);--rc-ink:var(--r3-ink);--rc-tint:var(--r3-tint);} [data-r=\"6\"]{--rc:var(--r6);--rc-ink:var(--r6-ink);--rc-tint:var(--r6-tint);} [data-r=\"9\"]{--rc:var(--r9);--rc-ink:var(--r9-ink);--rc-tint:var(--r9-tint);} .ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:0 16px;border-radius:8px;border:1px solid var(--line-2);background:var(--panel);color:var(--ink);font:500 15px var(--font);white-space:nowrap;cursor:pointer;transition:background 160ms,border-color 160ms,transform 120ms var(--ease);} .ds-btn:hover{border-color:var(--axis);} .ds-btn:active{transform:scale(0.97);} .ds-btn:focus-visible{outline:2px solid var(--ink);outline-offset:2px;} .ds-btn-quiet{border-color:transparent;background:transparent;color:var(--muted);} .ds-btn-quiet:hover{background:var(--grid);border-color:transparent;}"
+      "refersTo": "button-outline",
+      "description": "기본 버튼. 흰 바탕에 그린 테두리.",
+      "html": "<button class=\"ds-btn-o\">지금 새로 받기</button>",
+      "css": ":host{--paper:#FFFFFF;--page:#F4F6F5;--green:#1E4A34;--green-2:#2D5C44;--ink:#10231A;--sub:#3F5248;--line:#D5DED8;--line-soft:#E7EDE9;--wash:#EEF3F0;--flag:#C4541F;--flag-ink:#A8441A;--flag-wash:#FFF1E6;--flag-line:#F0CDB4;--font:'Pretendard Variable',Pretendard,-apple-system,'Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;--num:'Barlow Condensed','Pretendard Variable',Pretendard,sans-serif;--ease:cubic-bezier(0.16,1,0.3,1);} .ds-btn-o{display:inline-flex;align-items:center;min-height:48px;padding:0 18px;border-radius:10px;border:1.5px solid var(--green);background:var(--paper);color:var(--green);font-size:16px;font-weight:700;cursor:pointer;transition:background 160ms,transform 120ms var(--ease);font-family:var(--font);} .ds-btn-o:hover{background:var(--wash);} .ds-btn-o:active{transform:scale(0.97);} .ds-btn-o:focus-visible{outline:3px solid var(--flag);outline-offset:2px;}"
     },
     {
-      "name": "보상 지급 버튼",
-      "kind": "button",
-      "refersTo": "button-reward-3",
-      "description": "「지급 완료」만 회차의 -ink 보상색을 쓴다.",
-      "html": "<div style=\"display:flex;gap:8px\"><button class=\"ds-btn ds-btn-r\" data-r=\"3\">지급 완료</button><button class=\"ds-btn ds-btn-r\" data-r=\"6\">지급 완료</button><button class=\"ds-btn ds-btn-r\" data-r=\"9\">지급 완료</button></div>",
-      "css": ":host{--page:#F3F6F8;--panel:#FFFFFF;--ink:#1D2731;--muted:#5D6975;--line:#E2E7EC;--line-2:#DCE2E8;--grid:#EEF2F5;--axis:#B8C2CC;--rest:#C3CAD1;--r3:#CC7A14;--r3-ink:#8A4F00;--r3-tint:#FBF0E1;--r6:#0B8C66;--r6-ink:#06694B;--r6-tint:#E2F3ED;--r9:#D2563C;--r9-ink:#A63A23;--r9-tint:#FBE8E3;--font:'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;--shadow:0 1px 2px rgba(29,39,49,0.05),0 4px 12px rgba(29,39,49,0.04);--shadow-lift:0 2px 4px rgba(29,39,49,0.06),0 12px 28px rgba(29,39,49,0.10);--ease:cubic-bezier(0.16,1,0.3,1);font-family:var(--font);font-variant-numeric:tabular-nums;color:var(--ink);} [data-r=\"3\"]{--rc:var(--r3);--rc-ink:var(--r3-ink);--rc-tint:var(--r3-tint);} [data-r=\"6\"]{--rc:var(--r6);--rc-ink:var(--r6-ink);--rc-tint:var(--r6-tint);} [data-r=\"9\"]{--rc:var(--r9);--rc-ink:var(--r9-ink);--rc-tint:var(--r9-tint);} .ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:0 16px;border-radius:8px;border:1px solid var(--line-2);background:var(--panel);color:var(--ink);font:500 15px var(--font);white-space:nowrap;cursor:pointer;transition:background 160ms,border-color 160ms,transform 120ms var(--ease);} .ds-btn:hover{border-color:var(--axis);} .ds-btn:active{transform:scale(0.97);} .ds-btn:focus-visible{outline:2px solid var(--ink);outline-offset:2px;} .ds-btn-r{background:var(--rc-ink);border-color:var(--rc-ink);color:#FFFFFF;} "
-    },
-    {
-      "name": "입력 · 검색",
+      "name": "입력칸",
       "kind": "input",
       "refersTo": "field",
-      "description": "44px 입력, 16px 글자, 포커스는 2px 잉크 윤곽선.",
-      "html": "<label class=\"ds-search\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" aria-hidden=\"true\"><circle cx=\"11\" cy=\"11\" r=\"7\"/><path d=\"M20 20l-3.5-3.5\"/></svg><input class=\"ds-field\" type=\"search\" placeholder=\"단체명 검색\"></label>",
-      "css": ":host{--page:#F3F6F8;--panel:#FFFFFF;--ink:#1D2731;--muted:#5D6975;--line:#E2E7EC;--line-2:#DCE2E8;--grid:#EEF2F5;--axis:#B8C2CC;--rest:#C3CAD1;--r3:#CC7A14;--r3-ink:#8A4F00;--r3-tint:#FBF0E1;--r6:#0B8C66;--r6-ink:#06694B;--r6-tint:#E2F3ED;--r9:#D2563C;--r9-ink:#A63A23;--r9-tint:#FBE8E3;--font:'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;--shadow:0 1px 2px rgba(29,39,49,0.05),0 4px 12px rgba(29,39,49,0.04);--shadow-lift:0 2px 4px rgba(29,39,49,0.06),0 12px 28px rgba(29,39,49,0.10);--ease:cubic-bezier(0.16,1,0.3,1);font-family:var(--font);font-variant-numeric:tabular-nums;color:var(--ink);} [data-r=\"3\"]{--rc:var(--r3);--rc-ink:var(--r3-ink);--rc-tint:var(--r3-tint);} [data-r=\"6\"]{--rc:var(--r6);--rc-ink:var(--r6-ink);--rc-tint:var(--r6-tint);} [data-r=\"9\"]{--rc:var(--r9);--rc-ink:var(--r9-ink);--rc-tint:var(--r9-tint);} .ds-search{position:relative;display:block;width:280px;} .ds-search svg{position:absolute;left:12px;top:50%;width:18px;height:18px;transform:translateY(-50%);color:var(--muted);pointer-events:none;} .ds-field{width:100%;box-sizing:border-box;min-height:44px;padding:0 12px 0 38px;border-radius:8px;border:1px solid var(--line-2);background:var(--panel);font:16px var(--font);color:var(--ink);} .ds-field:focus-visible{outline:2px solid var(--ink);outline-offset:0;border-color:var(--ink);}"
+      "description": "50px 높이 입력. 포커스 시 그린 테두리와 옅은 링.",
+      "html": "<input class=\"ds-field\" placeholder=\"메모 (선택)\">",
+      "css": ":host{--paper:#FFFFFF;--page:#F4F6F5;--green:#1E4A34;--green-2:#2D5C44;--ink:#10231A;--sub:#3F5248;--line:#D5DED8;--line-soft:#E7EDE9;--wash:#EEF3F0;--flag:#C4541F;--flag-ink:#A8441A;--flag-wash:#FFF1E6;--flag-line:#F0CDB4;--font:'Pretendard Variable',Pretendard,-apple-system,'Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;--num:'Barlow Condensed','Pretendard Variable',Pretendard,sans-serif;--ease:cubic-bezier(0.16,1,0.3,1);} .ds-field{width:100%;min-height:50px;padding:0 14px;border-radius:10px;border:1.5px solid var(--line);background:var(--paper);font-size:17px;color:var(--ink);font-family:var(--font);} .ds-field::placeholder{color:#66776D;} .ds-field:focus-visible{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(30,74,52,0.15);}"
     },
     {
       "name": "칩",
       "kind": "chip",
       "refersTo": "chip",
-      "description": "보기 전환. 눌림은 잉크색 알약, 적용 중 필터는 격자 회색.",
-      "html": "<div style=\"display:flex;gap:6px\"><button class=\"ds-chip\" aria-pressed=\"true\">전체 <b>123</b></button><button class=\"ds-chip\" aria-pressed=\"false\">이번 주</button><button class=\"ds-chip ds-chip-filter\">3회 칸</button></div>",
-      "css": ":host{--page:#F3F6F8;--panel:#FFFFFF;--ink:#1D2731;--muted:#5D6975;--line:#E2E7EC;--line-2:#DCE2E8;--grid:#EEF2F5;--axis:#B8C2CC;--rest:#C3CAD1;--r3:#CC7A14;--r3-ink:#8A4F00;--r3-tint:#FBF0E1;--r6:#0B8C66;--r6-ink:#06694B;--r6-tint:#E2F3ED;--r9:#D2563C;--r9-ink:#A63A23;--r9-tint:#FBE8E3;--font:'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;--shadow:0 1px 2px rgba(29,39,49,0.05),0 4px 12px rgba(29,39,49,0.04);--shadow-lift:0 2px 4px rgba(29,39,49,0.06),0 12px 28px rgba(29,39,49,0.10);--ease:cubic-bezier(0.16,1,0.3,1);font-family:var(--font);font-variant-numeric:tabular-nums;color:var(--ink);} [data-r=\"3\"]{--rc:var(--r3);--rc-ink:var(--r3-ink);--rc-tint:var(--r3-tint);} [data-r=\"6\"]{--rc:var(--r6);--rc-ink:var(--r6-ink);--rc-tint:var(--r6-tint);} [data-r=\"9\"]{--rc:var(--r9);--rc-ink:var(--r9-ink);--rc-tint:var(--r9-tint);} .ds-chip{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 14px;border-radius:999px;border:1px solid var(--line-2);background:var(--panel);font:500 13px var(--font);color:var(--ink);cursor:pointer;} .ds-chip b{font-weight:700;} .ds-chip:hover{border-color:var(--axis);} .ds-chip[aria-pressed=\"true\"]{background:var(--ink);border-color:var(--ink);color:#FFFFFF;} .ds-chip-filter{background:var(--grid);border-color:var(--grid);} .ds-chip:focus-visible{outline:2px solid var(--ink);outline-offset:2px;}"
+      "description": "매출 기간 필터. 선택 시 그린.",
+      "html": "<div class=\"ds-chips\"><button class=\"ds-chip\" aria-pressed=\"true\">전체</button><button class=\"ds-chip\" aria-pressed=\"false\">상반기</button></div>",
+      "css": ":host{--paper:#FFFFFF;--page:#F4F6F5;--green:#1E4A34;--green-2:#2D5C44;--ink:#10231A;--sub:#3F5248;--line:#D5DED8;--line-soft:#E7EDE9;--wash:#EEF3F0;--flag:#C4541F;--flag-ink:#A8441A;--flag-wash:#FFF1E6;--flag-line:#F0CDB4;--font:'Pretendard Variable',Pretendard,-apple-system,'Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;--num:'Barlow Condensed','Pretendard Variable',Pretendard,sans-serif;--ease:cubic-bezier(0.16,1,0.3,1);} .ds-chips{display:flex;gap:8px;} .ds-chip{min-height:42px;padding:0 16px;border-radius:999px;border:1.5px solid var(--line);background:var(--paper);font-size:16px;font-weight:700;color:var(--ink);cursor:pointer;font-family:var(--font);} .ds-chip:hover{border-color:var(--green);} .ds-chip[aria-pressed=\"true\"]{background:var(--green);border-color:var(--green);color:#FFFFFF;} .ds-chip:focus-visible{outline:3px solid var(--flag);outline-offset:2px;}"
     },
     {
-      "name": "3·3·3 스탬프 줄",
+      "name": "그린 표지",
       "kind": "custom",
-      "refersTo": "stamp",
-      "description": "채움 = 확정, 점선 = 현장 체크 임시, 3·6·9번째는 보상색 고리.",
-      "html": "<span class=\"ds-stamps\"><span class=\"ds-trio\" data-r=\"3\"><i class=\"ds-st on\"></i><i class=\"ds-st on\"></i><i class=\"ds-st on m\"></i></span><span class=\"ds-trio\" data-r=\"6\"><i class=\"ds-st on\"></i><i class=\"ds-st prov\"></i><i class=\"ds-st m\"></i></span><span class=\"ds-trio\" data-r=\"9\"><i class=\"ds-st\"></i><i class=\"ds-st\"></i><i class=\"ds-st m\"></i></span></span>",
-      "css": ":host{--page:#F3F6F8;--panel:#FFFFFF;--ink:#1D2731;--muted:#5D6975;--line:#E2E7EC;--line-2:#DCE2E8;--grid:#EEF2F5;--axis:#B8C2CC;--rest:#C3CAD1;--r3:#CC7A14;--r3-ink:#8A4F00;--r3-tint:#FBF0E1;--r6:#0B8C66;--r6-ink:#06694B;--r6-tint:#E2F3ED;--r9:#D2563C;--r9-ink:#A63A23;--r9-tint:#FBE8E3;--font:'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;--shadow:0 1px 2px rgba(29,39,49,0.05),0 4px 12px rgba(29,39,49,0.04);--shadow-lift:0 2px 4px rgba(29,39,49,0.06),0 12px 28px rgba(29,39,49,0.10);--ease:cubic-bezier(0.16,1,0.3,1);font-family:var(--font);font-variant-numeric:tabular-nums;color:var(--ink);} [data-r=\"3\"]{--rc:var(--r3);--rc-ink:var(--r3-ink);--rc-tint:var(--r3-tint);} [data-r=\"6\"]{--rc:var(--r6);--rc-ink:var(--r6-ink);--rc-tint:var(--r6-tint);} [data-r=\"9\"]{--rc:var(--r9);--rc-ink:var(--r9-ink);--rc-tint:var(--r9-tint);} .ds-stamps{display:inline-flex;gap:8px;} .ds-trio{display:inline-flex;gap:4px;} .ds-st{width:14px;height:14px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--axis);background:transparent;box-sizing:border-box;} .ds-st.m{box-shadow:inset 0 0 0 2px var(--rc);} .ds-st.on{background:var(--ink);box-shadow:none;} .ds-st.on.m{background:var(--rc);} .ds-st.prov{background:#FFFFFF;box-shadow:none;border:2px dashed var(--ink);} .ds-st.prov.m{border-color:var(--rc);} "
+      "refersTo": "cover",
+      "description": "모든 탭의 머리. 탭 가능한 카운트에 평소 보이는 밑줄과 아래 꺾쇠.",
+      "html": "<header class=\"ds-cover\"><div class=\"ds-meta\">엑셀 10/24 기준</div><h1>3·6·9 임박 단체</h1><div class=\"ds-sum\"><button>1번 남음<b>4</b></button><button>2번 남음<b>7</b></button><button class=\"is-flag\">체크 필요<b>2</b></button></div></header>",
+      "css": ":host{--paper:#FFFFFF;--page:#F4F6F5;--green:#1E4A34;--green-2:#2D5C44;--ink:#10231A;--sub:#3F5248;--line:#D5DED8;--line-soft:#E7EDE9;--wash:#EEF3F0;--flag:#C4541F;--flag-ink:#A8441A;--flag-wash:#FFF1E6;--flag-line:#F0CDB4;--font:'Pretendard Variable',Pretendard,-apple-system,'Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;--num:'Barlow Condensed','Pretendard Variable',Pretendard,sans-serif;--ease:cubic-bezier(0.16,1,0.3,1);} .ds-cover{background:var(--green);color:#FFFFFF;padding:12px 20px 20px;font-family:var(--font);} .ds-meta{font-size:15px;font-weight:600;color:rgba(255,255,255,0.85);} .ds-cover h1{margin:8px 0 0;font-size:30px;font-weight:800;letter-spacing:-0.035em;line-height:1.2;} .ds-sum{display:flex;flex-wrap:wrap;gap:8px 28px;margin-top:12px;} .ds-sum button{display:block;padding:4px 0 6px;border:0;background:none;text-align:left;font:600 15px var(--font);color:rgba(255,255,255,0.9);border-bottom:2px solid rgba(255,255,255,0.35);cursor:pointer;} .ds-sum button::after{content:\"\";display:inline-block;width:7px;height:7px;margin-left:7px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-3px) rotate(45deg);} .ds-sum button:hover{border-bottom-color:#FFFFFF;} .ds-sum button:focus-visible{outline:3px solid var(--flag);outline-offset:2px;} .ds-sum b{display:block;font-family:var(--num);font-size:40px;font-weight:700;line-height:1;color:#FFFFFF;} .ds-sum .is-flag b{color:#FFB27A;}"
     },
     {
-      "name": "0–9 사다리",
+      "name": "칸 머리줄",
       "kind": "custom",
-      "refersTo": "card",
-      "description": "10칸 막대이자 필터. 3·6·9는 보상색, 2·5·8은 다음 보상 빗금.",
-      "html": "<div class=\"ds-rungs\"><button class=\"ds-rung\"><span class=\"n\">14</span><span class=\"col\" style=\"--h:40px\"></span><span class=\"lab\">0회</span></button><button class=\"ds-rung\"><span class=\"n\">22</span><span class=\"col\" style=\"--h:62px\"></span><span class=\"lab\">1회</span></button><button class=\"ds-rung\" data-r=\"3\" data-next><span class=\"n\">18</span><span class=\"col\" style=\"--h:52px\"></span><span class=\"lab\">2회</span></button><button class=\"ds-rung\" data-r=\"3\" data-reward><span class=\"n\">11</span><span class=\"col\" style=\"--h:32px\"></span><span class=\"lab\">3회</span></button><button class=\"ds-rung\"><span class=\"n\">15</span><span class=\"col\" style=\"--h:44px\"></span><span class=\"lab\">4회</span></button><button class=\"ds-rung\" data-r=\"6\" data-next><span class=\"n\">9</span><span class=\"col\" style=\"--h:28px\"></span><span class=\"lab\">5회</span></button><button class=\"ds-rung\" data-r=\"6\" data-reward><span class=\"n\">8</span><span class=\"col\" style=\"--h:24px\"></span><span class=\"lab\">6회</span></button><button class=\"ds-rung\"><span class=\"n\">12</span><span class=\"col\" style=\"--h:36px\"></span><span class=\"lab\">7회</span></button><button class=\"ds-rung\" data-r=\"9\" data-next><span class=\"n\">5</span><span class=\"col\" style=\"--h:16px\"></span><span class=\"lab\">8회</span></button><button class=\"ds-rung\" data-r=\"9\" data-reward><span class=\"n\">9</span><span class=\"col\" style=\"--h:28px\"></span><span class=\"lab\">9회</span></button></div>",
-      "css": ":host{--page:#F3F6F8;--panel:#FFFFFF;--ink:#1D2731;--muted:#5D6975;--line:#E2E7EC;--line-2:#DCE2E8;--grid:#EEF2F5;--axis:#B8C2CC;--rest:#C3CAD1;--r3:#CC7A14;--r3-ink:#8A4F00;--r3-tint:#FBF0E1;--r6:#0B8C66;--r6-ink:#06694B;--r6-tint:#E2F3ED;--r9:#D2563C;--r9-ink:#A63A23;--r9-tint:#FBE8E3;--font:'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;--shadow:0 1px 2px rgba(29,39,49,0.05),0 4px 12px rgba(29,39,49,0.04);--shadow-lift:0 2px 4px rgba(29,39,49,0.06),0 12px 28px rgba(29,39,49,0.10);--ease:cubic-bezier(0.16,1,0.3,1);font-family:var(--font);font-variant-numeric:tabular-nums;color:var(--ink);} [data-r=\"3\"]{--rc:var(--r3);--rc-ink:var(--r3-ink);--rc-tint:var(--r3-tint);} [data-r=\"6\"]{--rc:var(--r6);--rc-ink:var(--r6-ink);--rc-tint:var(--r6-tint);} [data-r=\"9\"]{--rc:var(--r9);--rc-ink:var(--r9-ink);--rc-tint:var(--r9-tint);} .ds-rungs{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:4px;align-items:end;width:360px;} .ds-rung{display:flex;flex-direction:column;justify-content:flex-end;gap:3px;min-height:112px;padding:0;border:0;background:none;border-radius:6px;cursor:pointer;font-family:var(--font);} .ds-rung:hover{background:var(--grid);} .ds-rung:focus-visible{outline:2px solid var(--ink);outline-offset:2px;} .ds-rung .n{font-size:12px;font-weight:700;text-align:center;color:var(--ink);} .ds-rung .col{height:var(--h);min-height:3px;border-radius:4px 4px 2px 2px;background:var(--rest);} .ds-rung .lab{font-size:11px;text-align:center;color:var(--muted);padding-top:2px;border-top:1px solid var(--line);} .ds-rung[data-reward] .col{background:var(--rc);} .ds-rung[data-reward] .lab{color:var(--rc-ink);font-weight:700;border-top-color:var(--rc);} .ds-rung[data-next] .col{background:repeating-linear-gradient(135deg,var(--rc-tint) 0 4px,#FFFFFF 4px 7px);box-shadow:inset 0 0 0 1.5px var(--rc);} .ds-rung[data-next] .n{color:var(--rc-ink);}"
+      "refersTo": "section-rule",
+      "description": "야디지북 페이지 구분. 달성 칸은 주황.",
+      "html": "<h2 class=\"ds-rule\">1 번 남음 <span class=\"n\">4</span></h2><h2 class=\"ds-rule is-flag\">달성 · 지급 체크 <span class=\"n\">2</span></h2>",
+      "css": ":host{--paper:#FFFFFF;--page:#F4F6F5;--green:#1E4A34;--green-2:#2D5C44;--ink:#10231A;--sub:#3F5248;--line:#D5DED8;--line-soft:#E7EDE9;--wash:#EEF3F0;--flag:#C4541F;--flag-ink:#A8441A;--flag-wash:#FFF1E6;--flag-line:#F0CDB4;--font:'Pretendard Variable',Pretendard,-apple-system,'Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;--num:'Barlow Condensed','Pretendard Variable',Pretendard,sans-serif;--ease:cubic-bezier(0.16,1,0.3,1);} .ds-rule{display:flex;align-items:baseline;gap:10px;margin:20px 0 0;padding-bottom:8px;border-bottom:2.5px solid var(--green);font-size:18px;font-weight:800;color:var(--green);letter-spacing:-0.02em;font-family:var(--font);} .ds-rule .n{font-family:var(--num);font-size:22px;font-weight:700;letter-spacing:0;} .ds-rule.is-flag{color:var(--flag-ink);border-bottom-color:var(--flag);}"
     },
     {
-      "name": "단체 카드 (지급 대기)",
-      "kind": "card",
-      "refersTo": "group-card",
-      "description": "next / pending / row 세 변형 중 pending. 보상색 고리와 -tint 보상 칸.",
-      "html": "<article class=\"ds-gcard is-pending\" data-r=\"6\"><div class=\"ds-gmain\"><span class=\"ds-gname\">한마음산악회 <span class=\"ds-tag prov\">임시 포함</span></span><span class=\"ds-gwhen\"><b>10/25</b>오늘</span><span class=\"ds-gline\"><span class=\"ds-stamps\"><span class=\"ds-trio\" data-r=\"3\"><i class=\"ds-st on\"></i><i class=\"ds-st on\"></i><i class=\"ds-st on m\"></i></span><span class=\"ds-trio\" data-r=\"6\"><i class=\"ds-st on\"></i><i class=\"ds-st prov\"></i><i class=\"ds-st m\"></i></span><span class=\"ds-trio\" data-r=\"9\"><i class=\"ds-st\"></i><i class=\"ds-st\"></i><i class=\"ds-st m\"></i></span></span><span class=\"ds-gnext\">다음 후식 = <b>6회째</b></span></span></div><div class=\"ds-reward\"><b>6회 달성 · 오늘의 샐러드</b><span>10/25 달성 (현장 체크)</span><button class=\"ds-btn ds-btn-r\" data-r=\"6\">지급 완료</button></div></article>",
-      "css": ":host{--page:#F3F6F8;--panel:#FFFFFF;--ink:#1D2731;--muted:#5D6975;--line:#E2E7EC;--line-2:#DCE2E8;--grid:#EEF2F5;--axis:#B8C2CC;--rest:#C3CAD1;--r3:#CC7A14;--r3-ink:#8A4F00;--r3-tint:#FBF0E1;--r6:#0B8C66;--r6-ink:#06694B;--r6-tint:#E2F3ED;--r9:#D2563C;--r9-ink:#A63A23;--r9-tint:#FBE8E3;--font:'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;--shadow:0 1px 2px rgba(29,39,49,0.05),0 4px 12px rgba(29,39,49,0.04);--shadow-lift:0 2px 4px rgba(29,39,49,0.06),0 12px 28px rgba(29,39,49,0.10);--ease:cubic-bezier(0.16,1,0.3,1);font-family:var(--font);font-variant-numeric:tabular-nums;color:var(--ink);} [data-r=\"3\"]{--rc:var(--r3);--rc-ink:var(--r3-ink);--rc-tint:var(--r3-tint);} [data-r=\"6\"]{--rc:var(--r6);--rc-ink:var(--r6-ink);--rc-tint:var(--r6-tint);} [data-r=\"9\"]{--rc:var(--r9);--rc-ink:var(--r9-ink);--rc-tint:var(--r9-tint);} .ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:0 16px;border-radius:8px;border:1px solid var(--line-2);background:var(--panel);color:var(--ink);font:500 15px var(--font);white-space:nowrap;cursor:pointer;transition:background 160ms,border-color 160ms,transform 120ms var(--ease);} .ds-btn:hover{border-color:var(--axis);} .ds-btn:active{transform:scale(0.97);} .ds-btn:focus-visible{outline:2px solid var(--ink);outline-offset:2px;} .ds-btn-r{background:var(--rc-ink);border-color:var(--rc-ink);color:#FFFFFF;} .ds-stamps{display:inline-flex;gap:8px;} .ds-trio{display:inline-flex;gap:4px;} .ds-st{width:14px;height:14px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--axis);background:transparent;box-sizing:border-box;} .ds-st.m{box-shadow:inset 0 0 0 2px var(--rc);} .ds-st.on{background:var(--ink);box-shadow:none;} .ds-st.on.m{background:var(--rc);} .ds-st.prov{background:#FFFFFF;box-shadow:none;border:2px dashed var(--ink);} .ds-st.prov.m{border-color:var(--rc);} .ds-gcard{width:360px;background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);} .ds-gcard.is-next{border-color:color-mix(in srgb,var(--rc) 45%,var(--line));} .ds-gcard.is-pending{border-color:var(--rc);box-shadow:0 0 0 1px var(--rc),var(--shadow);} .ds-gmain{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 12px;align-items:center;padding:12px 14px;} .ds-gname{display:flex;align-items:center;gap:6px;font-size:15px;font-weight:700;letter-spacing:-0.01em;} .ds-tag{display:inline-flex;align-items:center;height:20px;padding:0 7px;border-radius:999px;font-size:11px;font-weight:700;background:var(--grid);color:var(--muted);} .ds-tag.prov{background:#FFFFFF;color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink);} .ds-gwhen{text-align:right;font-size:13px;color:var(--muted);} .ds-gwhen b{display:block;font-size:15px;color:var(--r9-ink);} .ds-gline{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;} .ds-gnext{font-size:13px;color:var(--muted);} .ds-gnext b{color:var(--rc-ink);} .ds-reward{display:grid;gap:6px;padding:12px 14px 14px;margin:0 10px 10px;border-radius:10px;background:var(--rc-tint);font-size:12px;color:var(--muted);} .ds-reward b{color:var(--rc-ink);font-size:15px;}"
+      "name": "야디지 페이지 행",
+      "kind": "custom",
+      "refersTo": "hole-row",
+      "description": "단체 한 페이지: 큰 남은 횟수와 티→깃발 경로.",
+      "html": "<button class=\"ds-hole\"><span class=\"nm\">파주상공회</span><span class=\"yd\"><b>1</b><span>번 남음</span></span><span class=\"rw\">3회 · 커피 쿠폰</span><span class=\"path\"><em></em><i></i><em></em><i class=\"o\"></i><em class=\"o\"></em><span class=\"flag\">3</span></span></button>",
+      "css": ":host{--paper:#FFFFFF;--page:#F4F6F5;--green:#1E4A34;--green-2:#2D5C44;--ink:#10231A;--sub:#3F5248;--line:#D5DED8;--line-soft:#E7EDE9;--wash:#EEF3F0;--flag:#C4541F;--flag-ink:#A8441A;--flag-wash:#FFF1E6;--flag-line:#F0CDB4;--font:'Pretendard Variable',Pretendard,-apple-system,'Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;--num:'Barlow Condensed','Pretendard Variable',Pretendard,sans-serif;--ease:cubic-bezier(0.16,1,0.3,1);} .ds-hole{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 14px;align-items:center;width:100%;padding:18px 20px;border:0;border-bottom:1px solid var(--line);background:var(--paper);text-align:left;color:var(--ink);cursor:pointer;font-family:var(--font);} .ds-hole:hover{background:#FAFCFB;} .ds-hole:focus-visible{outline:3px solid var(--flag);outline-offset:-3px;} .ds-hole .nm{font-size:21px;font-weight:800;letter-spacing:-0.03em;line-height:1.3;} .ds-hole .rw{font-size:16px;font-weight:600;color:var(--green-2);} .ds-hole .yd{grid-row:span 2;text-align:right;min-width:64px;} .ds-hole .yd b{display:block;font-family:var(--num);font-size:54px;font-weight:700;line-height:0.9;} .ds-hole .yd span{display:block;margin-top:2px;font-size:14px;font-weight:700;color:var(--green-2);} .ds-hole .path{grid-column:1/-1;display:flex;align-items:center;margin-top:10px;} .ds-hole .path em{width:14px;height:14px;border-radius:50%;background:var(--green);flex:none;} .ds-hole .path em.o{background:var(--paper);box-shadow:inset 0 0 0 3px var(--line);} .ds-hole .path i{width:16px;height:4px;background:var(--green);flex:none;} .ds-hole .path i.o{background:var(--line);} .ds-hole .flag{margin-left:6px;padding:2px 9px;border-radius:4px;background:var(--flag);color:#FFFFFF;font-family:var(--num);font-size:16px;font-weight:700;line-height:1.3;letter-spacing:0.02em;}"
+    },
+    {
+      "name": "달성 행 · 체크 버튼",
+      "kind": "custom",
+      "refersTo": "hole-row-done",
+      "description": "달성했지만 지급 체크 전인 단체. 큰 잉크 테두리 체크 버튼과 메모.",
+      "html": "<div class=\"ds-done\"><div class=\"top\"><span class=\"nm\">파주상공회</span><span class=\"yd\"><b>3회</b><span>달성</span></span></div><div class=\"row\"><button class=\"ds-tick\"><span class=\"box\"></span>지급했으면 체크</button><input class=\"memo\" placeholder=\"메모 (선택)\"></div></div>",
+      "css": ":host{--paper:#FFFFFF;--page:#F4F6F5;--green:#1E4A34;--green-2:#2D5C44;--ink:#10231A;--sub:#3F5248;--line:#D5DED8;--line-soft:#E7EDE9;--wash:#EEF3F0;--flag:#C4541F;--flag-ink:#A8441A;--flag-wash:#FFF1E6;--flag-line:#F0CDB4;--font:'Pretendard Variable',Pretendard,-apple-system,'Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;--num:'Barlow Condensed','Pretendard Variable',Pretendard,sans-serif;--ease:cubic-bezier(0.16,1,0.3,1);} .ds-done{background:var(--flag-wash);border-bottom:1px solid var(--flag-line);padding:14px 20px;font-family:var(--font);} .ds-done .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;} .ds-done .nm{font-size:21px;font-weight:800;letter-spacing:-0.03em;color:var(--ink);} .ds-done .yd{text-align:right;color:var(--flag-ink);} .ds-done .yd b{display:block;font-size:36px;font-weight:800;letter-spacing:-0.03em;line-height:1.1;} .ds-done .yd span{font-size:14px;font-weight:700;} .ds-done .row{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:center;} .ds-tick{display:inline-flex;align-items:center;gap:12px;min-height:50px;padding:0 18px 0 12px;border-radius:10px;border:2px solid var(--ink);background:var(--paper);font:800 17px var(--font);color:var(--ink);cursor:pointer;} .ds-tick .box{width:26px;height:26px;border-radius:6px;border:2.5px solid var(--ink);flex:none;} .ds-tick:hover{box-shadow:0 2px 6px rgba(16,35,26,0.12);} .ds-tick:focus-visible{outline:3px solid var(--flag);outline-offset:2px;} .ds-done .memo{min-height:50px;padding:0 14px;border-radius:10px;border:1.5px solid var(--line);background:var(--paper);font:16px var(--font);} .ds-done .memo:focus-visible{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(30,74,52,0.15);}"
+    },
+    {
+      "name": "하단 탭 막대",
+      "kind": "nav",
+      "refersTo": "tabbar-pill-active",
+      "description": "휴대폰 3칸 하단 탭. 900px 이상에서는 표지 위 흰 알약으로 바뀐다.",
+      "html": "<nav class=\"ds-tabbar\"><button aria-current=\"page\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M6 21V4\"/><path d=\"M6 4l11 4-11 4\"/><path d=\"M3 21h8\"/></svg>3·6·9</button><button><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"><path d=\"M4 20h16\"/><path d=\"M7 16v-5\"/><path d=\"M12 16V6\"/><path d=\"M17 16v-8\"/></svg>매출</button><button><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z\"/><path d=\"M14 3v5h5\"/><path d=\"M12 17v-6\"/><path d=\"M9.5 13.5L12 11l2.5 2.5\"/></svg>자료</button></nav>",
+      "css": ":host{--paper:#FFFFFF;--page:#F4F6F5;--green:#1E4A34;--green-2:#2D5C44;--ink:#10231A;--sub:#3F5248;--line:#D5DED8;--line-soft:#E7EDE9;--wash:#EEF3F0;--flag:#C4541F;--flag-ink:#A8441A;--flag-wash:#FFF1E6;--flag-line:#F0CDB4;--font:'Pretendard Variable',Pretendard,-apple-system,'Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;--num:'Barlow Condensed','Pretendard Variable',Pretendard,sans-serif;--ease:cubic-bezier(0.16,1,0.3,1);} .ds-tabbar{display:grid;grid-template-columns:repeat(3,1fr);padding:4px 8px;background:rgba(255,255,255,0.97);border-top:1px solid var(--line);} .ds-tabbar button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:56px;border:0;background:none;color:#5C6E64;font:700 13px var(--font);border-radius:12px;cursor:pointer;} .ds-tabbar svg{width:26px;height:26px;} .ds-tabbar button:hover{color:var(--green);} .ds-tabbar button[aria-current=\"page\"]{color:var(--green);} .ds-tabbar button[aria-current=\"page\"] svg{stroke-width:2.4;} .ds-tabbar button:focus-visible{outline:3px solid var(--flag);outline-offset:2px;}"
     },
     {
       "name": "토스트 (되돌리기)",
       "kind": "custom",
       "refersTo": "toast",
-      "description": "화면 위쪽에 뜨는 잉크색 알림. 되돌릴 수 있으면 6초.",
-      "html": "<div class=\"ds-toast\" role=\"status\"><span>한마음산악회 오늘의 샐러드 지급 완료</span><button>되돌리기</button></div>",
-      "css": ":host{--page:#F3F6F8;--panel:#FFFFFF;--ink:#1D2731;--muted:#5D6975;--line:#E2E7EC;--line-2:#DCE2E8;--grid:#EEF2F5;--axis:#B8C2CC;--rest:#C3CAD1;--r3:#CC7A14;--r3-ink:#8A4F00;--r3-tint:#FBF0E1;--r6:#0B8C66;--r6-ink:#06694B;--r6-tint:#E2F3ED;--r9:#D2563C;--r9-ink:#A63A23;--r9-tint:#FBE8E3;--font:'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;--shadow:0 1px 2px rgba(29,39,49,0.05),0 4px 12px rgba(29,39,49,0.04);--shadow-lift:0 2px 4px rgba(29,39,49,0.06),0 12px 28px rgba(29,39,49,0.10);--ease:cubic-bezier(0.16,1,0.3,1);font-family:var(--font);font-variant-numeric:tabular-nums;color:var(--ink);} [data-r=\"3\"]{--rc:var(--r3);--rc-ink:var(--r3-ink);--rc-tint:var(--r3-tint);} [data-r=\"6\"]{--rc:var(--r6);--rc-ink:var(--r6-ink);--rc-tint:var(--r6-tint);} [data-r=\"9\"]{--rc:var(--r9);--rc-ink:var(--r9-ink);--rc-tint:var(--r9-tint);} .ds-toast{display:inline-flex;align-items:center;gap:12px;max-width:520px;padding:10px 10px 10px 16px;border-radius:12px;background:var(--ink);color:#FFFFFF;font:13px var(--font);box-shadow:var(--shadow-lift);} .ds-toast button{min-height:36px;padding:0 12px;border:0;border-radius:8px;background:rgba(255,255,255,0.14);color:#FFFFFF;font:700 13px var(--font);cursor:pointer;} .ds-toast button:hover{background:rgba(255,255,255,0.22);} .ds-toast button:focus-visible{outline:2px solid #FFFFFF;outline-offset:2px;}"
-    },
-    {
-      "name": "탭 내비게이션",
-      "kind": "nav",
-      "refersTo": "tab-pill-wide",
-      "description": "900px 미만은 하단 3칸 탭바, 900px 이상은 우측 상단 알약 묶음(여기는 넓은 화면 형태).",
-      "html": "<nav class=\"ds-tabs\" aria-label=\"화면\"><button aria-current=\"page\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" aria-hidden=\"true\"><circle cx=\"6\" cy=\"7\" r=\"2.2\"/><circle cx=\"12\" cy=\"7\" r=\"2.2\"/><circle cx=\"18\" cy=\"7\" r=\"2.2\"/><circle cx=\"6\" cy=\"14\" r=\"2.2\"/><circle cx=\"12\" cy=\"14\" r=\"2.2\"/><circle cx=\"18\" cy=\"14\" r=\"2.2\" fill=\"currentColor\"/><path d=\"M4 20h16\"/></svg>프로모션</button><button><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" aria-hidden=\"true\"><path d=\"M4 20h16\"/><path d=\"M7 16v-5\"/><path d=\"M12 16V6\"/><path d=\"M17 16v-8\"/></svg>매출</button><button><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z\"/><path d=\"M14 3v5h5\"/><path d=\"M12 17v-6\"/><path d=\"M9.5 13.5L12 11l2.5 2.5\"/></svg>자료</button></nav>",
-      "css": ":host{--page:#F3F6F8;--panel:#FFFFFF;--ink:#1D2731;--muted:#5D6975;--line:#E2E7EC;--line-2:#DCE2E8;--grid:#EEF2F5;--axis:#B8C2CC;--rest:#C3CAD1;--r3:#CC7A14;--r3-ink:#8A4F00;--r3-tint:#FBF0E1;--r6:#0B8C66;--r6-ink:#06694B;--r6-tint:#E2F3ED;--r9:#D2563C;--r9-ink:#A63A23;--r9-tint:#FBE8E3;--font:'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;--shadow:0 1px 2px rgba(29,39,49,0.05),0 4px 12px rgba(29,39,49,0.04);--shadow-lift:0 2px 4px rgba(29,39,49,0.06),0 12px 28px rgba(29,39,49,0.10);--ease:cubic-bezier(0.16,1,0.3,1);font-family:var(--font);font-variant-numeric:tabular-nums;color:var(--ink);} [data-r=\"3\"]{--rc:var(--r3);--rc-ink:var(--r3-ink);--rc-tint:var(--r3-tint);} [data-r=\"6\"]{--rc:var(--r6);--rc-ink:var(--r6-ink);--rc-tint:var(--r6-tint);} [data-r=\"9\"]{--rc:var(--r9);--rc-ink:var(--r9-ink);--rc-tint:var(--r9-tint);} .ds-tabs{display:flex;gap:4px;} .ds-tabs button{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 14px;border:1px solid var(--line-2);border-radius:999px;background:var(--panel);color:var(--muted);font:500 13px var(--font);cursor:pointer;} .ds-tabs button svg{width:18px;height:18px;} .ds-tabs button:hover{border-color:var(--axis);} .ds-tabs button[aria-current=\"page\"]{background:var(--ink);border-color:var(--ink);color:#FFFFFF;font-weight:700;} .ds-tabs button:focus-visible{outline:2px solid var(--ink);outline-offset:2px;}"
+      "description": "떠 있는 유일한 층. 되돌리기 동작 포함.",
+      "html": "<div class=\"ds-toast\"><span>파주상공회 3회 보상 지급 체크</span><button>되돌리기</button></div>",
+      "css": ":host{--paper:#FFFFFF;--page:#F4F6F5;--green:#1E4A34;--green-2:#2D5C44;--ink:#10231A;--sub:#3F5248;--line:#D5DED8;--line-soft:#E7EDE9;--wash:#EEF3F0;--flag:#C4541F;--flag-ink:#A8441A;--flag-wash:#FFF1E6;--flag-line:#F0CDB4;--font:'Pretendard Variable',Pretendard,-apple-system,'Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;--num:'Barlow Condensed','Pretendard Variable',Pretendard,sans-serif;--ease:cubic-bezier(0.16,1,0.3,1);} .ds-toast{display:inline-flex;align-items:center;gap:14px;padding:12px 12px 12px 18px;border-radius:14px;background:var(--ink);color:#FFFFFF;font:600 16px var(--font);box-shadow:0 10px 30px rgba(16,35,26,0.3);} .ds-toast button{min-height:40px;padding:0 14px;border:0;border-radius:10px;background:rgba(255,255,255,0.16);color:#FFFFFF;font:800 15px var(--font);cursor:pointer;} .ds-toast button:hover{background:rgba(255,255,255,0.26);} .ds-toast button:focus-visible{outline:3px solid var(--flag);outline-offset:2px;}"
     }
   ],
   "narrative": {
-    "northStar": "현장 스탬프 장부",
-    "overview": "이 앱은 기존 연단체 대시보드 v3의 밝은 대시보드 세계를 그대로 잇는다. 차가운 회청색 바탕(`page`) 위에 흰 카드와 머리카락 굵기의 테두리, 짙은 잉크색 글자, Noto Sans KR과 고정폭 숫자(tabular figures). 이 차분한 바탕 위에서 색은 거의 오직 보상에만 쓰인다. 3회 호박색, 6회 초록, 9회 주홍. 화면을 훑었을 때 색이 보이는 곳이 곧 「오늘 무엇을 줘야 하는가」의 답이다.\n\n형태의 중심은 0–9 사다리와 3·3·3 스탬프 줄이다. 단체마다 현재 후식사 횟수의 칸에 서 있고, 스탬프는 확정(채움), 현장 체크 임시(점선 고리), 보상 칸(보상색 고리)을 눈으로 구분한다. 휴대폰을 서서 한 손으로 쓰는 현장 도구이므로 밀도는 중간이고, 모든 탭 대상은 최소 44px이다. 장식은 없다. 깊이는 아주 옅은 그림자 한 겹이 전부이고, 움직임은 상태가 바뀌었다는 증거(스탬프가 찍힘, 카드가 반짝임, 토스트 등장)로만 쓴다.\n\n확정·임시·추정의 구분이 이 세계의 문법이다. 실선 채움은 엑셀로 확정된 값, 점선은 엑셀 확정 전 현장 체크, 「예상」 글자는 추정 방문일이다. 이 세 가지를 같은 모양으로 그리는 화면은 이 시스템을 벗어난다.",
+    "northStar": "야디지북 (The Yardage Book)",
+    "overview": "이 앱은 캐디가 주머니에서 꺼내 보는 야디지북처럼 읽힌다. 각 연단체는 한 페이지이고, 그 페이지가 말하는 것은 하나뿐이다. 다음 깃발(3·6·9 보상)까지 남은 후식사 횟수가 큰 숫자 하나로 오른쪽에 서 있고, 그 아래로 티에서 깃발까지 가는 점과 선의 경로가 그려진다. 목록은 깃발에 가까운 순서로 내려간다. 촘촘한 회색 라벨 대시보드나 CRM 표가 아니라 한 손으로 서서 훑는 종이다.\n\n바탕은 흰 종이이고, 모든 탭의 머리에 짙은 페어웨이 그린 표지가 한 덩어리로 놓인다. 페이지 구분은 그린 머리줄(두꺼운 밑줄)로 하고, 페이지 사이는 가는 헤어라인으로만 나눈다. 색은 거의 그린과 잉크뿐이다. 주황은 깃발과 \"달성\" 상태에만 나타나므로 화면에서 주황이 보이면 그곳이 지금 손을 대야 할 곳이다.\n\n밀도는 의도적으로 낮다. 본문은 16–17px 이상, 단체명은 21px, 남은 거리 숫자는 54px 압축 고딕 숫자다. 그림자 없이 평면으로 두고, 깊이는 표지와 종이의 대비, 그리고 머리줄과 헤어라인의 위계로만 만든다.",
     "keyCharacteristics": [
-      "밝은 회청색 바탕 + 흰 카드 + `line` 테두리 + 옅은 그림자 한 겹",
-      "무채색 잉크가 기본, 색은 보상 3색과 상태(정상·주의·오류)에만",
-      "눌린 상태는 언제나 잉크색 알약(배경 `ink`, 글자 흰색)",
-      "모든 숫자는 고정폭 숫자, 천 단위 쉼표",
-      "점선 = 임시(현장 체크·끌어 놓기 영역·빈 상태), 실선 = 확정",
-      "휴대폰은 하단 탭바, 900px 이상은 우측 상단 알약 내비게이션"
+      "흰 종이 + 짙은 그린 표지 블록, 모든 탭이 같은 표지를 머리에 쓴다",
+      "한 단체 = 한 페이지(행), 오른쪽에 큰 거리 숫자, 아래에 티→깃발 경로",
+      "주황은 깃발과 달성 상태 전용",
+      "한국어는 Pretendard Variable, 숫자는 Barlow Condensed",
+      "평면, 헤어라인 구분, 두꺼운 그린 머리줄로 칸을 나눈다",
+      "휴대폰은 하단 탭 막대, 900px 이상에서는 표지 위 흰 알약 탭"
     ],
     "rules": [
       {
-        "name": "보상만 색을 갖는다 규칙",
-        "body": "프로모션 화면에서 채도는 보상 3색과 상태색에만 허락된다. 단체·사다리 칸·버튼이 보상과 무관하면 무채색 잉크로 그린다. 색이 보이는 곳이 곧 지급할 곳이다.",
+        "name": "The One Flag Rule",
+        "body": "주황 계열(`flag`, `flag-ink`, `flag-wash`, `flag-line`, `flag-on-green`)은 깃발 탭과 달성·지급 대기 상태에만 쓴다. 강조가 필요하다고 주황을 꺼내지 않는다. 주황이 보이면 그곳에 할 일이 있다.",
         "section": "colors"
       },
       {
-        "name": "세 단계 보상색 규칙",
-        "body": "보상색 기본값 위에 흰 글자를 올리지 않는다. 흰 글자 버튼은 `-ink`, 연한 바탕은 `-tint`, 막대·고리·테두리만 기본색이다.",
+        "name": "The Green Cover Rule",
+        "body": "모든 탭은 같은 그린 표지(`green` 바탕, 흰 글자)로 시작한다. 표지 위의 흰 글자 보조 정보는 `rgba(255, 255, 255, 0.85)`, 표지 위 테두리는 `rgba(255, 255, 255, 0.45)`로 한 단계만 낮춘다.",
         "section": "colors"
       },
       {
-        "name": "탭마다 색의 뜻 규칙",
-        "body": "초록과 호박색은 프로모션 탭에서는 보상(6회·3회), 매출 탭에서는 사이트(클럽하우스·스타트하우스)를 뜻한다. 두 뜻을 한 화면에 섞지 않는다. 한 화면에 보상과 사이트가 함께 나와야 하면 범례로 뜻을 반드시 밝힌다.",
-        "section": "colors"
-      },
-      {
-        "name": "고정폭 숫자 규칙",
-        "body": "숫자가 들어가는 모든 자리는 고정폭 숫자다. 금액은 원 단위 천 단위 쉼표, 비교되는 숫자는 오른쪽 정렬.",
+        "name": "The Standing Reader Rule",
+        "body": "서서 한 손으로 읽는 화면이다. 읽어야 하는 본문은 16px 아래로 내리지 않는다. 14px 이하는 단위, 표 머리, 탭 이름처럼 옆에 큰 글자가 이미 있는 자리에만 쓴다.",
         "section": "typography"
       },
       {
-        "name": "굵기로 강조 규칙",
-        "body": "강조는 색보다 굵기(700)로 한다. 색을 쓰는 강조는 보상(`-ink`)과 오류(`bad`)뿐이다.",
+        "name": "The Numerals Are Barlow Rule",
+        "body": "거리·횟수·금액·순위 숫자는 `.num` 계열(Barlow Condensed 700, `letter-spacing: 0`)로 쓰고, 그 옆 단위 글자는 Pretendard로 되돌린다.",
         "section": "typography"
       },
       {
-        "name": "휴식은 평평하게 규칙",
-        "body": "그림자는 카드 휴식 한 겹이 기본이다. 더 깊은 그림자는 떠 있는 일시 요소(토스트, 툴팁)와 방금 바뀐 카드의 반짝임에만 쓴다.",
+        "name": "The Flat Page Rule",
+        "body": "단체 행, 칸, 상세는 그림자 없이 종이 위에 그대로 놓인다. 구분은 선으로 한다. 카드 상자로 감싸지 않는다.",
         "section": "elevation"
       }
     ],
     "dos": [
-      "**Do** 보상과 관련된 모든 요소는 `data-r=\"3|6|9\"`로 `--rc` 세 단계를 받아 칠한다. 새 보상 화면도 같은 경로를 쓴다.",
-      "**Do** 확정은 실선·채움, 현장 체크 임시는 점선, 추정 방문일은 「예상」 글자로 구분한다.",
-      "**Do** 선택·눌림·현재 상태는 `ink` 바탕 흰 글자 알약으로 표현한다(칩, 매출 필터, 넓은 화면 탭).",
-      "**Do** 흰 글자를 보상색 위에 올릴 때는 `-ink` 단계를 쓴다.",
-      "**Do** 모든 탭 대상은 최소 44px(보조 칩·작은 버튼 36px), 입력 글자는 16px.",
-      "**Do** 숫자는 고정폭 숫자, 천 단위 쉼표, 원 단위로 쓴다.",
-      "**Do** 상태 변경 뒤에는 위쪽 토스트로 알리고, 되돌릴 수 있는 기록에는 「되돌리기」를 붙인다.",
-      "**Do** 움직임은 `cubic-bezier(0.16, 1, 0.3, 1)` 하나로, 줄임 모션 설정에서는 사실상 0으로 줄인다."
+      "**Do** 모든 탭을 `green` 표지로 시작하고, 표지 안에는 흰 글자와 Barlow 큰 숫자만 둔다.",
+      "**Do** 단체 하나를 한 행(페이지)으로 두고, 오른쪽에 54px `yardage` 숫자, 아래에 티→깃발 경로를 그린다.",
+      "**Do** 목록을 깃발에 가까운 순서(달성 → 1 번 남음 → 2 번 남음 …)로 정렬하고, 칸은 2.5px `green` 머리줄로 나눈다.",
+      "**Do** 행 사이를 1px `line` / `line-soft` 헤어라인으로만 구분한다.",
+      "**Do** 숫자는 Barlow Condensed 700 + `tabular-nums`, 단위 글자는 Pretendard로 되돌린다.",
+      "**Do** 읽는 본문은 16px 이상, 단체명은 21px, 터치 목표는 42px 이상(주요 동작 48–50px)으로 둔다.",
+      "**Do** 표지의 탭 가능한 숫자에는 평소에도 보이는 밑줄과 아래 꺾쇠를 붙인다.",
+      "**Do** 아이콘은 `currentColor` 선 SVG로 그린다.",
+      "**Do** `prefers-reduced-motion`에서 모든 애니메이션과 전환을 1ms로 줄인다."
     ],
     "donts": [
-      "**Don't** 보상과 무관한 요소에 보상 3색이나 다른 채도 있는 색을 쓰지 않는다.",
-      "**Don't** 현장 체크(임시)를 확정과 같은 채움 스탬프로 그리지 않는다.",
-      "**Don't** 보상 기본색(`r3`·`r6`·`r9`) 위에 흰 글자를 올리지 않는다.",
-      "**Don't** 토스트를 화면 아래에 띄우지 않는다. 지급·후식 진행 버튼을 가린다.",
-      "**Don't** 카드 휴식 상태에 `--shadow-lift`보다 깊은 그림자를 쓰지 않는다.",
-      "**Don't** 매출 탭의 사이트 색 뜻(초록 = 클럽하우스, 호박 = 스타트하우스)을 범례 없이 프로모션 화면에 섞지 않는다."
+      "**Don't** 주황(`flag` 계열)을 깃발 탭과 달성·지급 대기 상태 밖의 강조에 쓰지 않는다.",
+      "**Don't** 단체 행을 그림자 있는 카드나 상자로 감싸지 않는다. 그림자는 토스트, 체크 버튼 hover, 세그먼트 선택, 포커스 링에만 쓴다.",
+      "**Don't** 순위 막대에 업장 색을 섞지 않는다. 업장 색은 업장 비중 막대, 월별 누적 막대, 범례에만 쓴다.",
+      "**Don't** 촘촘한 회색 소형 라벨 대시보드나 CRM 표처럼 구성하지 않는다. 표는 대조 표와 등급 표에만 쓴다.",
+      "**Don't** 읽어야 하는 문장을 14px 이하로 내리지 않는다."
     ]
   }
 }

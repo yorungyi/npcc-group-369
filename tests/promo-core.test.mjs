@@ -5,8 +5,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, existsSync } from 'node:fs';
 import {
-  toInt, toISODate, parseSheet, sumRows, compareTotals, predictNext, buildPromo,
-  nextRewardGroups, pendingRewards, ladder,
+  toInt, toISODate, parseSheet, sumRows, compareTotals, buildPromo, promoBoard,
 } from '../js/promo-core.js';
 
 const SETTINGS = { threshold_per_pax: 10000, items: { 3: '생맥주 피쳐', 6: '오늘의 샐러드', 9: '닭날개&감자튀김' } };
@@ -50,36 +49,13 @@ test('parseSheet 는 머리글·합계행을 건너뛰고 합계 오류와 중�
   assert.deepEqual(res.years, [2026]);
 });
 
-test('predictNext: 매월 셋째 수요일 패턴', () => {
-  const dates = ['2026-03-18', '2026-04-15', '2026-05-20', '2026-06-17', '2026-08-19', '2026-09-16', '2026-10-21'];
-  const p = predictNext(dates, '2026-10-25');
-  assert.equal(p.basis, 'pattern');
-  assert.equal(p.date, '2026-11-18');
-  assert.equal(p.note, '매월 셋째 수요일');
-});
-
-test('predictNext: 오늘이 방문일이면 다음 달로 넘어간다', () => {
-  const dates = ['2026-09-16', '2026-10-21', '2026-08-19'];
-  assert.equal(predictNext(dates, '2026-10-21').date, '2026-11-18');
-});
-
-test('predictNext: 패턴이 없으면 간격 중앙값', () => {
-  const p = predictNext(['2026-03-01', '2026-03-29', '2026-04-30'], '2026-05-02');
-  assert.equal(p.basis, 'interval');
-  assert.equal(p.date, '2026-05-30');
-});
-
-test('predictNext: 방문 1회뿐이면 추정하지 않는다', () => {
-  assert.equal(predictNext(['2026-03-01'], '2026-05-02'), null);
-});
-
 test('buildPromo: 1인 1만원 기준, 3·6·9 달성, 지급 상태', () => {
   const visits = [
     visit('2026-03-01', 'A', 390000), visit('2026-04-01', 'A', 23000), // 두 번째는 1인 1,917원 → 제외
     visit('2026-05-01', 'A', 200000), visit('2026-06-01', 'A', 0), visit('2026-07-01', 'A', 300000),
   ];
   const rewards = [{ year: 2026, group_name: 'A', milestone: 3, given_on: '2026-07-01', item: '생맥주 피쳐' }];
-  const r = buildPromo({ year: 2026, visits, marks: [], rewards, settings: SETTINGS, today: '2026-10-25', appStart: '2026-10-25' });
+  const r = buildPromo({ year: 2026, visits, marks: [], rewards, settings: SETTINGS, appStart: '2026-10-25' });
   const a = r.groups.find((g) => g.name === 'A');
   assert.equal(a.count, 3);
   assert.deepEqual(a.visits.map((v) => v.kind), ['confirmed', 'excluded', 'confirmed', 'visit', 'confirmed']);
@@ -95,7 +71,7 @@ test('buildPromo: 현장 체크는 임시로 세고, 엑셀과 어긋나면 불�
     { visit_date: '2026-04-01', group_name: 'B', field_post: true, field_amount: null, override_counted: null },
     { visit_date: '2026-10-25', group_name: 'B', field_post: true, field_amount: null, override_counted: null },
   ];
-  const r = buildPromo({ year: 2026, visits, marks, rewards: [], settings: SETTINGS, today: '2026-10-25', appStart: '2026-10-25' });
+  const r = buildPromo({ year: 2026, visits, marks, rewards: [], settings: SETTINGS, appStart: '2026-10-25' });
   const b = r.groups[0];
   assert.equal(b.count, 2); // 3/1 확정 + 10/25 임시 (4/1 은 엑셀 기준 미달 → 불인정)
   assert.equal(b.visits.find((v) => v.date === '2026-10-25').kind, 'provisional');
@@ -105,24 +81,38 @@ test('buildPromo: 현장 체크는 임시로 세고, 엑셀과 어긋나면 불�
 test('buildPromo: 수동 인정은 엑셀 판정보다 우선한다', () => {
   const visits = [visit('2026-04-01', 'C', 23000)];
   const marks = [{ visit_date: '2026-04-01', group_name: 'C', field_post: null, override_counted: true }];
-  const r = buildPromo({ year: 2026, visits, marks, rewards: [], settings: SETTINGS, today: '2026-10-25', appStart: '2026-10-25' });
+  const r = buildPromo({ year: 2026, visits, marks, rewards: [], settings: SETTINGS, appStart: '2026-10-25' });
   assert.equal(r.groups[0].count, 1);
   assert.equal(r.issues.length, 0);
 });
 
 test('buildPromo: 연도가 다르면 따로 센다', () => {
   const visits = [visit('2026-03-01', 'D', 390000), visit('2027-03-01', 'D', 390000)];
-  const r = buildPromo({ year: 2027, visits, marks: [], rewards: [], settings: SETTINGS, today: '2027-03-02', appStart: '2026-10-25' });
+  const r = buildPromo({ year: 2027, visits, marks: [], rewards: [], settings: SETTINGS, appStart: '2026-10-25' });
   assert.equal(r.groups[0].count, 1);
 });
 
 test('buildPromo: 지급 기록이 있는데 달성이 사라지면 orphan', () => {
   const rewards = [{ year: 2026, group_name: 'E', milestone: 3, given_on: '2026-05-01', item: 'x' }];
-  const r = buildPromo({ year: 2026, visits: [visit('2026-03-01', 'E', 390000)], marks: [], rewards, settings: SETTINGS, today: '2026-10-25', appStart: '2026-10-25' });
+  const r = buildPromo({ year: 2026, visits: [visit('2026-03-01', 'E', 390000)], marks: [], rewards, settings: SETTINGS, appStart: '2026-10-25' });
   assert.ok(r.issues.some((i) => i.type === 'orphan'));
 });
 
 const SHEET = process.env.NPCC_SHEET_JSON;
+test('promoBoard: 달성 미체크가 따로, 남은 횟수 순, 같은 칸은 큰 보상 먼저', () => {
+  const v = [];
+  ['2026-03-01', '2026-04-01', '2026-05-01'].forEach((d) => v.push(visit(d, 'A3', 300000))); // 3회 달성
+  ['2026-03-01', '2026-04-01'].forEach((d) => v.push(visit(d, 'B2', 300000)));               // 1번 남음(3회)
+  ['2026-03-01', '2026-04-01', '2026-05-01', '2026-06-01', '2026-07-01'].forEach((d) => v.push(visit(d, 'C5', 300000))); // 1번 남음(6회)
+  v.push(visit('2026-03-01', 'D1', 300000));                                                    // 2번 남음
+  const r = buildPromo({ year: 2026, visits: v, marks: [], rewards: [], settings: SETTINGS, appStart: '2026-01-01' });
+  const b = promoBoard(r.groups);
+  assert.deepEqual(b.achieved.map((x) => [x.group.name, x.milestone]), [['A3', 3], ['C5', 3]]); // C5도 3회는 지났고 체크 전
+  assert.deepEqual(b.steps.map((x) => x.steps), [1, 2, 3]);
+  assert.deepEqual(b.steps[0].groups.map((g) => g.name), ['C5', 'B2']);
+  assert.equal(b.legacyCount, 0);
+});
+
 test('원자료 26년: 시트 합계행과 1원까지 일치하고 카운트가 분석값과 같다', { skip: !SHEET || !existsSync(SHEET) }, () => {
   const aoa = JSON.parse(readFileSync(SHEET, 'utf8'));
   const res = parseSheet(aoa);
@@ -133,15 +123,18 @@ test('원자료 26년: 시트 합계행과 1원까지 일치하고 카운트가 
   assert.equal(sumRows(res.rows).total, 382596500);
   assert.equal(new Set(res.rows.map((r) => r.group_name)).size, 123);
 
-  const r = buildPromo({ year: 2026, visits: res.rows, marks: [], rewards: [], settings: SETTINGS, today: '2026-10-25', appStart: '2026-10-25' });
+  const r = buildPromo({ year: 2026, visits: res.rows, marks: [], rewards: [], settings: SETTINGS, appStart: '2026-10-25' });
   const active = r.groups.filter((g) => !g.withdrawn);
   assert.equal(r.groups.filter((g) => g.withdrawn).length, 6);
   assert.equal(r.groups.reduce((a, g) => a + g.visits.filter((v) => v.counted).length, 0), 248);
   assert.equal(active.filter((g) => g.count >= 3).length, 40);
   assert.equal(active.filter((g) => g.count >= 6).length, 21);
-  assert.equal(nextRewardGroups(r.groups).length, 16);
+  const board = promoBoard(r.groups);
+  assert.equal(board.steps[0].steps, 1);
+  assert.equal(board.steps[0].groups.length, 16);
+  assert.equal(board.steps[1].groups.length, 29);
+  assert.equal(board.achieved.length, 0); // 26년 달성분은 모두 앱 도입 전
+  assert.equal(board.legacyCount, 62);
   assert.equal(r.issues.filter((i) => i.type === 'below').length, 2);
-  const legacy = r.groups.reduce((a, g) => a + g.legacyPending.length, 0);
-  assert.equal(legacy, pendingRewards(r.groups).length);
-  assert.equal(ladder(r.groups).reduce((a, x) => a + x.groups.length, 0), active.length);
+  assert.equal(board.steps.reduce((a, x) => a + x.groups.length, 0) + board.finished.length, active.length);
 });

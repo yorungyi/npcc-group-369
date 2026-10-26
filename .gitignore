@@ -6,3 +6,4 @@ node_modules/
 *.xls
 *.csv
 dev/fixture.json
+dev/fixture-*.json

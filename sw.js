@@ -4,14 +4,13 @@
    Supabase 요청은 절대 가로채지 않는다(로그인 토큰이 오가고, 데이터 사본은 store.js가 따로 관리).
    ============================================================ */
 
-const CACHE = 'npcc-grp-v1';
+const CACHE = 'npcc-grp-v3';
 
 const SHELL = [
   './',
   './manifest.webmanifest',
-  './css/app.css?v=1',
-  './css/sales.css?v=1',
-  './js/app.js?v=1',
+  './css/app.css?v=3',
+  './js/app.js?v=3',
   './js/config.js',
   './js/store.js',
   './js/ui.js',
@@ -27,7 +26,7 @@ const SHELL = [
 // 외부 라이브러리는 index.html 과 같은 무결성 해시로 받아 둔다
 const CDN = [
   ['https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js', 'sha384-0w2KAL2YHP6wKOkUDzkCDGgVvfmHnj02DHeQ6XcHOgTfFsGyonKOpShMH1x6nk9o'],
-  ['https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js', 'sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i'],
+  ['https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css', 'sha384-2nNKoOPayicGa+aRguOQuiZP+RqQ4G3jalfDeOgftkKD7zBM2gJXTwcFqCZltdv0'],
 ];
 
 // 버전이 주소에 박힌 외부 파일 — 한 번 받으면 바뀌지 않는다

@@ -1,20 +1,18 @@
 /* ============================================================
-   app.js — 시작점: 로그인 · 탭 전환 · 연도 선택 · 다시 그리기
+   app.js — 시작점: 로그인 · 탭 전환 · 연도 선택 · 표지 · 다시 그리기
    ============================================================ */
 
 import { CONFIG } from './config.js';
 import { buildPromo } from './promo-core.js';
 import { sb, load, loadFixture, getData, getStatus, subscribe, clearLocal, flush } from './store.js';
-import { initPromo, renderPromo } from './promo-view.js';
-import { initSales } from './sales-view.js';
+import { initPromo, renderPromo, promoCover } from './promo-view.js';
+import { renderSales, salesCover } from './sales-view.js';
 import { initData, renderData } from './data-view.js';
-import { todayISO } from './ui.js';
+import { el, fmtDate, todayISO } from './ui.js';
 
 const $ = (id) => document.getElementById(id);
-const TABS = { promo: '3·6·9 프로모션', sales: '연단체 매출', data: '자료 · 확인' };
 const TAB_KEY = 'npcc-grp-tab';
-
-const app = { tab: 'promo', year: null, email: null, sales: null, booted: false };
+const app = { tab: 'promo', year: null, email: null, booted: false, ctx: null };
 
 /* ───────── 로그인 ───────── */
 function showLogin(message) {
@@ -49,14 +47,14 @@ async function logout() {
 }
 
 /* ───────── 탭 ───────── */
+const TABS = ['promo', 'sales', 'data'];
 function setTab(tab) {
-  app.tab = TABS[tab] ? tab : 'promo';
+  app.tab = TABS.includes(tab) ? tab : 'promo';
   try { localStorage.setItem(TAB_KEY, app.tab); } catch { /* 무시 */ }
-  Object.keys(TABS).forEach((k) => { $(`tab-${k}`).hidden = k !== app.tab; });
+  TABS.forEach((k) => { $(`tab-${k}`).hidden = k !== app.tab; });
   document.querySelectorAll('.tabbar button').forEach((b) => {
     if (b.dataset.tab === app.tab) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current');
   });
-  $('barTitle').textContent = TABS[app.tab];
   window.scrollTo({ top: 0 });
   render();
 }
@@ -66,12 +64,11 @@ document.querySelectorAll('.tabbar button').forEach((b) => b.addEventListener('c
 function yearsAvailable(data, today) {
   const ys = new Set([Number(today.slice(0, 4))]);
   data.visits.forEach((v) => ys.add(Number(v.visit_date.slice(0, 4))));
-  data.marks.forEach((m) => ys.add(Number(m.visit_date.slice(0, 4))));
   return [...ys].sort((a, b) => b - a);
 }
 function drawYears(years) {
   const sel = $('yearSel');
-  const want = years.map(String).join(',');
+  const want = years.join(',');
   if (sel.dataset.years !== want) {
     sel.replaceChildren(...years.map((y) => { const o = document.createElement('option'); o.value = y; o.textContent = `${String(y).slice(2)}년`; return o; }));
     sel.dataset.years = want;
@@ -88,11 +85,11 @@ function settingsFor(year, all) {
   return { year, threshold_per_pax: prev?.threshold_per_pax ?? CONFIG.DEFAULT_THRESHOLD, items: { ...(prev?.items ?? CONFIG.DEFAULT_ITEMS) } };
 }
 
-/* ───────── 동기화 표시 ───────── */
+/* ───────── 동기화 표시 (지급 체크가 서버에 갔는지) ───────── */
 function drawSync() {
   const s = getStatus();
   const btn = $('syncBtn');
-  let state = 'ok'; let text = '동기화됨';
+  let state = 'ok'; let text = '저장됨';
   if (!s.online) { state = 'offline'; text = s.pending ? `오프라인 · 대기 ${s.pending}` : '오프라인'; }
   else if (s.syncing) { state = 'syncing'; text = '보내는 중'; }
   else if (s.pending) { state = 'pending'; text = `대기 ${s.pending}`; }
@@ -104,32 +101,41 @@ function drawSync() {
 }
 $('syncBtn').addEventListener('click', () => { flush(); setTab('data'); });
 
+/* ───────── 표지 ───────── */
+function drawCover() {
+  const c = app.ctx;
+  const yy = `${String(c.year).slice(2)}년`;
+  const latest = c.yearVisits.reduce((m, v) => (v.visit_date > m ? v.visit_date : m), '');
+  const asOf = latest ? `엑셀 ${fmtDate(latest)}까지` : '엑셀 자료 없음';
+  let title; let body;
+  if (app.tab === 'promo') { title = '3·6·9 임박 단체'; body = promoCover(c); }
+  else if (app.tab === 'sales') { title = `${yy} 연단체 매출`; body = salesCover(); }
+  else { title = '자료 · 확인'; body = [el('p', { class: 'cover-sub', text: '엑셀 반영 · 확인 필요 · 규칙 · 동기화' })]; }
+  $('coverTitle').textContent = title;
+  $('coverMeta').textContent = asOf; // 연도는 옆 선택칸이 보여준다
+  $('coverBody').replaceChildren(...body);
+}
+window.addEventListener('npcc:cover', () => { if (app.ctx) drawCover(); });
+
 /* ───────── 그리기 ───────── */
 function render() {
   if (!app.booted) return;
   const data = getData();
   const today = todayISO();
   const years = yearsAvailable(data, today);
-  if (!app.year || !years.includes(app.year)) app.year = years[0];
+  if (!app.year || !years.includes(app.year)) app.year = years.find((y) => data.visits.some((v) => v.visit_date.startsWith(String(y)))) ?? years[0];
   drawYears(years);
   drawSync();
 
   const settings = settingsFor(app.year, data.settings);
-  const promo = buildPromo({
-    year: app.year, visits: data.visits, marks: data.marks, rewards: data.rewards, settings, today,
-    appStart: CONFIG.APP_START, predict: { minShare: CONFIG.PATTERN_MIN_SHARE, minVisits: CONFIG.PATTERN_MIN_VISITS },
-  });
-  const ctx = { year: app.year, promo, settings, today, marks: data.marks, visits: data.visits, rewards: data.rewards, fetchedAt: data.fetchedAt, email: app.email };
+  const yearVisits = data.visits.filter((v) => Number(v.visit_date.slice(0, 4)) === app.year);
+  const promo = buildPromo({ year: app.year, visits: yearVisits, marks: data.marks, rewards: data.rewards, settings, appStart: CONFIG.APP_START });
+  app.ctx = { year: app.year, promo, settings, today, yearVisits, marks: data.marks, visits: data.visits, rewards: data.rewards, fetchedAt: data.fetchedAt, email: app.email };
 
-  renderPromo(ctx);
-  renderData(ctx);
-  const yy = `${String(app.year).slice(2)}년`;
-  if (app.tab === 'sales') {
-    app.sales.render(data.visits.filter((v) => Number(v.visit_date.slice(0, 4)) === app.year), yy);
-    $('barSub').textContent = `${yy} · 엑셀 확정분만 집계`;
-  }
-  if (app.tab === 'data') $('barSub').textContent = `${yy} · 엑셀 반영 · 확인 · 규칙`;
-  // 프로모션 탭의 부제는 renderPromo 가 쓴다
+  renderPromo(app.ctx);
+  renderData(app.ctx);
+  if (app.tab === 'sales') renderSales(yearVisits);
+  drawCover();
 }
 
 /* ───────── 시작 ───────── */
@@ -141,7 +147,6 @@ async function start(session, loader = load) {
   if (!viewsReady) {
     initPromo();
     initData({ onLogout: logout });
-    app.sales = initSales();
     subscribe(render);
     viewsReady = true;
   }
@@ -157,10 +162,7 @@ async function start(session, loader = load) {
   }
 }
 
-// 스크롤하면 상단바 아래 선
-window.addEventListener('scroll', () => { $('bar').classList.toggle('is-scrolled', window.scrollY > 4); }, { passive: true });
-
-// 날짜가 바뀌면(자정을 넘겨 켜 둔 경우) 오늘 기준을 다시 계산
+// 자정을 넘겨 켜 둔 경우 지급일 기준(오늘)을 다시 계산
 let lastDay = todayISO();
 setInterval(() => { const t = todayISO(); if (t !== lastDay) { lastDay = t; render(); } }, 60000);
 
@@ -169,7 +171,9 @@ const FIXTURE = ['localhost', '127.0.0.1'].includes(location.hostname) && new UR
 
 (async () => {
   if (FIXTURE) {
-    await start({ user: { email: '미리보기(사본)' } }, () => loadFixture('dev/fixture.json'));
+    // ?fixture=demo 처럼 이름을 주면 dev/fixture-demo.json (영문 소문자·숫자·하이픈만)
+    const name = (new URLSearchParams(location.search).get('fixture') || '').replace(/[^a-z0-9-]/g, '');
+    await start({ user: { email: '미리보기(사본)' } }, () => loadFixture(`dev/fixture${name ? `-${name}` : ''}.json`));
     return;
   }
   const { data } = await sb.auth.getSession();
@@ -177,6 +181,6 @@ const FIXTURE = ['localhost', '127.0.0.1'].includes(location.hostname) && new UR
   else showLogin();
 })();
 
-if ('serviceWorker' in navigator && window.isSecureContext) {
+if ('serviceWorker' in navigator && window.isSecureContext && !FIXTURE) {
   window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
 }
