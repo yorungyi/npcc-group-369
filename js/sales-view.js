@@ -5,6 +5,7 @@
    ============================================================ */
 
 import { el, fmtDate, won } from './ui.js';
+import { waiting } from './promo-view.js';
 
 const SITES = [
   { key: 'clubhouse', name: '클럽하우스', color: 'var(--site-ch)' },
@@ -60,7 +61,8 @@ function tierStats(arr, tier) {
 const selected = () => rows.filter((r) => !ui.months.length || ui.months.includes(r.month));
 
 /** 데이터가 바뀌면 다시 계산 (같은 배열이면 필터 상태 유지) */
-export function renderSales(data) {
+export function renderSales(data, phase = 'ready') {
+  if (phase !== 'ready') { $('sales').replaceChildren(waiting({ phase, error: null })); return; }
   if (data !== srcRef) { srcRef = data; rows = parse(data); ui.months = []; ui.open = null; ui.all = false; }
   draw();
 }

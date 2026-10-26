@@ -25,6 +25,7 @@ export function renderPromo(next) {
 
 /** 표지: 1번 남음 · 2번 남음 · 체크 필요 */
 export function promoCover(c) {
+  if (c.phase !== 'ready') return [el('div', { class: 'cover-sum' }, ['1번 남음', '2번 남음', '체크 필요'].map((t) => el('div', { class: 'sk-count' }, [el('b', { text: '–' }), t])))];
   const b = promoBoard(c.promo.groups);
   const n = (k) => b.steps.find((s) => s.steps === k)?.groups.length || 0;
   // 숫자를 누르면 그 칸으로 (야디지북의 손가락 탭)
@@ -51,6 +52,7 @@ const match = (g) => !ui.q || g.name.includes(ui.q) || (g.label || '').includes(
 
 function draw() {
   if (!ctx) return;
+  if (ctx.phase !== 'ready') { $('board').replaceChildren(waiting(ctx)); return; }
   const before = captureRects();
   const b = promoBoard(ctx.promo.groups);
   const searching = Boolean(ui.q);
@@ -100,6 +102,23 @@ function draw() {
     if (target) target.classList.add('is-flash');
     flashKey = null;
   }
+}
+
+/** 첫 자료를 받는 동안 실제 줄과 같은 모양의 뼈대, 실패하면 다시 시도 */
+export function waiting(c) {
+  if (c.phase === 'error') {
+    return el('div', { class: 'empty' }, [
+      el('p', { text: `자료를 받지 못했습니다. ${c.error || '연결을 확인해 주세요.'}` }),
+      el('button', { type: 'button', class: 'btn btn-sm', style: null, onclick: () => window.dispatchEvent(new Event('npcc:retry')) }, '다시 시도'),
+    ]);
+  }
+  const row = () => el('div', { class: 'hole sk-hole', 'aria-hidden': 'true' }, [
+    el('span', { class: 'sk sk-name' }), el('span', { class: 'sk sk-num' }), el('span', { class: 'sk sk-line' }), el('span', { class: 'sk sk-path' }),
+  ]);
+  return el('div', { class: 'board', role: 'status', 'aria-label': '자료를 받는 중' }, [
+    el('div', { class: 'rule sk-rule', 'aria-hidden': 'true' }, el('span', { class: 'sk sk-title' })),
+    el('div', { class: 'holes' }, [row(), row(), row(), row()]),
+  ]);
 }
 
 /* ───────── 단체 한 줄 ───────── */
@@ -152,7 +171,17 @@ function doneHole(a) {
       el('span', { class: 'rw', text: `${a.item} · ${fmtDate(a.reachedOn)} 방문에서 달성` }),
     ]),
     el('div', { class: 'tick-row' }, [
-      el('button', { type: 'button', class: 'tick', onclick: (e) => guard(e.currentTarget, () => giveReward(g, m, memo.value)) }, [el('span', { class: 'box', 'aria-hidden': 'true' }), '지급했으면 체크']),
+      el('button', {
+        type: 'button', class: 'tick',
+        // 누르는 순간 칸에 체크가 찍히고, 잠깐 보여준 뒤 줄이 새 자리로 간다
+        onclick: (e) => {
+          const btn = e.currentTarget;
+          if (btn.classList.contains('is-ticked')) return;
+          btn.classList.add('is-ticked');
+          btn.closest('.hole').classList.add('is-ticking');
+          setTimeout(() => giveReward(g, m, memo.value), matchMedia('(prefers-reduced-motion: reduce)').matches ? 150 : 450);
+        },
+      }, [el('span', { class: 'box', 'aria-hidden': 'true' }), '지급했으면 체크']),
       memo,
     ]),
   ]);

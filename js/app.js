@@ -106,16 +106,17 @@ function drawCover() {
   const c = app.ctx;
   const yy = `${String(c.year).slice(2)}년`;
   const latest = c.yearVisits.reduce((m, v) => (v.visit_date > m ? v.visit_date : m), '');
-  const asOf = latest ? `엑셀 ${fmtDate(latest)}까지` : '엑셀 자료 없음';
+  const asOf = c.phase === 'loading' ? '자료 받는 중…' : latest ? `엑셀 ${fmtDate(latest)}까지` : '엑셀 자료 없음';
   let title; let body;
   if (app.tab === 'promo') { title = '3·6·9 임박 단체'; body = promoCover(c); }
-  else if (app.tab === 'sales') { title = `${yy} 연단체 매출`; body = salesCover(); }
+  else if (app.tab === 'sales') { title = `${yy} 연단체 매출`; body = c.phase === 'ready' ? salesCover() : []; }
   else { title = '자료 · 확인'; body = [el('p', { class: 'cover-sub', text: '엑셀 반영 · 확인 필요 · 규칙 · 동기화' })]; }
   $('coverTitle').textContent = title;
   $('coverMeta').textContent = asOf; // 연도는 옆 선택칸이 보여준다
   $('coverBody').replaceChildren(...body);
 }
 window.addEventListener('npcc:cover', () => { if (app.ctx) drawCover(); });
+window.addEventListener('npcc:retry', () => { load().catch(() => drawSync()); });
 
 /* ───────── 그리기 ───────── */
 function render() {
@@ -130,11 +131,14 @@ function render() {
   const settings = settingsFor(app.year, data.settings);
   const yearVisits = data.visits.filter((v) => Number(v.visit_date.slice(0, 4)) === app.year);
   const promo = buildPromo({ year: app.year, visits: yearVisits, marks: data.marks, rewards: data.rewards, settings, appStart: CONFIG.APP_START });
-  app.ctx = { year: app.year, promo, settings, today, yearVisits, marks: data.marks, visits: data.visits, rewards: data.rewards, fetchedAt: data.fetchedAt, email: app.email };
+  // 첫 자료를 받기 전: loading(뼈대 화면) / 받기 실패: error(다시 시도) / 그 뒤: ready
+  const st = getStatus();
+  const phase = data.fetchedAt ? 'ready' : st.error ? 'error' : 'loading';
+  app.ctx = { phase, error: st.error, year: app.year, promo, settings, today, yearVisits, marks: data.marks, visits: data.visits, rewards: data.rewards, fetchedAt: data.fetchedAt, email: app.email };
 
   renderPromo(app.ctx);
   renderData(app.ctx);
-  if (app.tab === 'sales') renderSales(yearVisits);
+  if (app.tab === 'sales') renderSales(yearVisits, phase);
   drawCover();
 }
 

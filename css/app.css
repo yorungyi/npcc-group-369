@@ -134,6 +134,10 @@ main { width: min(100%, 1080px); margin: 0 auto; padding: 0 0 8px; }
 .rule .n { font-family: var(--num); font-size: 22px; font-weight: 700; letter-spacing: 0; }
 .rule .h { margin-left: auto; font-size: 14px; font-weight: 600; color: var(--sub); letter-spacing: 0; }
 .rule.is-flag { color: var(--flag-ink); border-bottom-color: var(--flag); }
+/* 긴 목록에서 지금 어느 칸(1번 남음·2번 남음…)인지 늘 보이게: 칸 머리줄이 위에 붙는다 */
+section > .rule, .tab > .rule { position: sticky; top: 0; z-index: 6; background: var(--paper); padding-top: 12px; margin-top: 8px; box-shadow: calc(-1 * var(--gutter)) 0 0 var(--paper), var(--gutter) 0 0 var(--paper); }
+details.fold > summary { position: sticky; top: 0; z-index: 6; background: var(--paper); }
+details.fold > summary .rule { padding-top: 12px; margin-top: 8px; }
 details.fold > summary { list-style: none; cursor: pointer; }
 details.fold > summary::-webkit-details-marker { display: none; }
 details.fold > summary .rule::after {
@@ -175,12 +179,20 @@ button.hole-main:hover { background: #FAFCFB; }
 .tick { display: inline-flex; align-items: center; gap: 12px; min-height: 50px; padding: 0 18px 0 12px; border-radius: 10px; border: 2px solid var(--ink); background: var(--paper); font-size: 17px; font-weight: 800; color: var(--ink); }
 .tick .box { width: 26px; height: 26px; border-radius: 6px; border: 2.5px solid var(--ink); flex: none; }
 .tick:hover { box-shadow: 0 2px 6px rgba(16, 35, 26, 0.12); }
+.tick .box { position: relative; transition: background 160ms var(--ease); }
+.tick.is-ticked { background: var(--green); border-color: var(--green); color: #FFFFFF; }
+.tick.is-ticked .box { background: #FFFFFF; border-color: #FFFFFF; animation: tick-pop 320ms var(--ease); }
+.tick.is-ticked .box::after { content: ""; position: absolute; left: 7px; top: 2px; width: 7px; height: 13px; border-right: 3px solid var(--green); border-bottom: 3px solid var(--green); transform: rotate(45deg); }
+@keyframes tick-pop { 0% { transform: scale(0.7); } 60% { transform: scale(1.15); } 100% { transform: scale(1); } }
+.hole.is-ticking { background: #E4F1E9; transition: background 300ms var(--ease); }
 .tick-row .field { min-height: 50px; font-size: 16px; }
 .hole.is-flash { animation: flash 1100ms var(--ease); }
 @keyframes flash { from { background: #DCEFE3; } to { background: var(--paper); } }
 
 /* 펼친 상세 */
-.detail { padding: 2px var(--gutter) 22px; display: grid; gap: 18px; }
+.detail { padding: 2px var(--gutter) 22px; display: grid; gap: 18px; animation: reveal 220ms var(--ease); }
+.rdetail { animation: reveal 220ms var(--ease); }
+@keyframes reveal { from { opacity: 0; transform: translateY(-6px); } }
 .detail h3 { font-size: 16px; font-weight: 800; color: var(--green); margin-bottom: 8px; }
 .rewards { display: grid; gap: 8px; }
 .rwd { display: grid; grid-template-columns: 52px minmax(0, 1fr) auto; gap: 12px; align-items: center; min-height: 56px; padding: 6px 8px 6px 6px; border-radius: 10px; background: var(--page); font-size: 16px; }
@@ -213,6 +225,20 @@ button.hole-main:hover { background: #FAFCFB; }
 .toast span { min-width: 0; }
 .toast button { flex: none; white-space: nowrap; min-height: 40px; padding: 0 14px; border: 0; border-radius: 10px; background: rgba(255, 255, 255, 0.16); color: #FFFFFF; font-weight: 800; font-size: 15px; }
 @keyframes toast-in { from { transform: translateY(12px); opacity: 0; } }
+
+/* ───────── 뼈대 로딩 (첫 자료를 받는 동안) ───────── */
+.sk { display: block; border-radius: 6px; background: linear-gradient(90deg, var(--line-soft) 0 40%, #F6F8F7 50%, var(--line-soft) 60%) 0 0 / 300% 100%; animation: sk 1.3s linear infinite; }
+@keyframes sk { to { background-position: -150% 0; } }
+.sk-hole { display: grid; grid-template-columns: minmax(0, 1fr) 56px; gap: 10px 14px; padding: 20px var(--gutter); }
+.sk-name { height: 24px; width: 46%; }
+.sk-num { grid-row: span 2; height: 52px; }
+.sk-line { height: 16px; width: 34%; }
+.sk-path { grid-column: 1 / -1; height: 14px; width: 62%; }
+.sk-rule { border-bottom-color: var(--line); }
+.sk-title { height: 20px; width: 110px; }
+.cover-sum .sk-count { font-size: 15px; font-weight: 600; color: rgba(255, 255, 255, 0.7); }
+.cover-sum .sk-count b { color: rgba(255, 255, 255, 0.5); }
+.empty .btn { margin-top: 12px; }
 
 /* ───────── 하단 탭 ───────── */
 .tabbar {
@@ -323,7 +349,7 @@ button.hole-main:hover { background: #FAFCFB; }
   .shell { padding-bottom: 48px; }
   .cover { padding-top: 18px; padding-bottom: 28px; }
   .cover-top { padding-right: 340px; }
-  .tabbar { top: 18px; bottom: auto; left: auto; right: max(28px, calc((100vw - 1080px) / 2 + 28px)); display: flex; gap: 6px; padding: 0; background: none; border: 0; backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .tabbar { position: absolute; top: 18px; bottom: auto; left: auto; right: max(28px, calc((100vw - 1080px) / 2 + 28px)); display: flex; gap: 6px; padding: 0; background: none; border: 0; backdrop-filter: none; -webkit-backdrop-filter: none; }
   .tabbar button { flex-direction: row; min-height: 40px; padding: 0 16px; gap: 6px; font-size: 15px; color: #FFFFFF; border: 1.5px solid rgba(255, 255, 255, 0.4); border-radius: 999px; }
   .tabbar button svg { width: 19px; height: 19px; }
   .tabbar button[aria-current="page"] { background: #FFFFFF; color: var(--green); border-color: #FFFFFF; }
